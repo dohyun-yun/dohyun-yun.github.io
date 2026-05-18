@@ -443,7 +443,7 @@ tbody tr:hover { background: var(--line-soft); }
   letter-spacing: 0;
 }
 
-/* alias landing & site index — list-style cards */
+/* alias landing & site index — editorial list rows */
 .runs-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -452,8 +452,8 @@ tbody tr:hover { background: var(--line-soft); }
 }
 .run-card {
   display: grid;
-  grid-template-columns: 100px 90px 1fr auto;
-  gap: 1.5rem;
+  grid-template-columns: 140px 1fr auto;
+  gap: 2rem;
   align-items: baseline;
   padding: 22px 4px;
   background: transparent;
@@ -473,40 +473,61 @@ tbody tr:hover { background: var(--line-soft); }
 .run-card .when {
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--ink-faint);
   padding-top: 0.5em;
+  white-space: nowrap;
 }
 .run-card .title {
   font-family: var(--serif);
   font-weight: 400;
   margin: 0;
-  font-size: 1.2rem;
-  letter-spacing: -0.01em;
+  font-size: 1.18rem;
+  letter-spacing: -0.012em;
   color: var(--ink);
-  line-height: 1.35;
+  line-height: 1.4;
   transition: color .2s ease;
+  word-break: keep-all;
+  text-wrap: pretty;
+  max-width: 56ch;
 }
 .run-card:hover .title { color: var(--accent); }
-.run-card .badges { display: flex; gap: 8px; flex-wrap: wrap; padding-top: 0.5em; }
+.run-card .badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding-top: 0.5em;
+}
 .run-card .badge {
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 3px 9px;
+  padding: 3px 10px;
   border-radius: 100px;
   background: transparent;
   border: 1px solid var(--line);
   color: var(--ink-muted);
+  white-space: nowrap;
 }
 .run-card .badge.no-op { color: var(--ink-faint); border-color: var(--line); }
 .run-card .badge.changes { color: var(--accent); border-color: var(--accent); }
-@media (max-width: 640px) {
-  .run-card { grid-template-columns: 1fr; gap: 0.45rem; padding: 18px 4px; }
-  .run-card .when, .run-card .badges { padding-top: 0; display: inline-flex; }
+@media (max-width: 720px) {
+  .run-card {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 20px 4px;
+  }
+  .run-card .when,
+  .run-card .badges {
+    padding-top: 0;
+    justify-content: flex-start;
+  }
+  .run-card .title { font-size: 1.1rem; }
 }
 
+/* site index — alias cards (grid of strategies) */
 .alias-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -514,18 +535,36 @@ tbody tr:hover { background: var(--line-soft); }
 }
 .alias-grid .run-card {
   display: block;
-  padding: 22px 24px;
+  padding: 24px 26px;
   background: var(--bg-elev);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
+  transition: all .2s ease;
 }
 .alias-grid .run-card:hover {
   background: var(--bg-elev);
   border-color: var(--accent);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
-.alias-grid .run-card .title { font-size: 1.1rem; margin: 8px 0; }
+.alias-grid .run-card .when {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  padding-top: 0;
+  white-space: normal;
+}
+.alias-grid .run-card .title {
+  font-size: 1.18rem;
+  margin: 10px 0 12px;
+  max-width: none;
+}
+.alias-grid .run-card .badges {
+  padding-top: 0;
+  justify-content: flex-start;
+}
 :root { --accent: #5a6b85; --accent-soft: #e6ebf2; }</style>
 </head>
 <body>
