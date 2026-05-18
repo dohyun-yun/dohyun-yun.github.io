@@ -95,7 +95,7 @@ h1, h2, h3, h4, h5, p, li, blockquote,
   padding: 32px 28px 96px;
 }
 
-/* site header — Field Notes brand row */
+/* site header — breadcrumb trail + theme toggle */
 header.site {
   display: flex;
   align-items: center;
@@ -105,6 +105,26 @@ header.site {
   margin-bottom: 32px;
   border-bottom: 1px solid var(--line);
 }
+header.site .trail {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+header.site .trail .crumb,
+header.site .trail a.crumb { color: var(--ink-muted); text-decoration: none; transition: color .2s ease; }
+header.site .trail a.crumb:hover { color: var(--accent); }
+header.site .trail span.crumb { color: var(--ink); }
+header.site .trail .crumb + .crumb::before {
+  content: "/";
+  color: var(--line);
+  margin: 0 10px;
+}
+/* legacy .brand fallback (kept in case templates inject it) */
 header.site .brand {
   display: flex;
   align-items: baseline;
@@ -135,6 +155,7 @@ header.site .brand .dot {
   letter-spacing: 0.06em;
   cursor: pointer;
   transition: all .15s ease;
+  white-space: nowrap;
 }
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
@@ -453,7 +474,7 @@ footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); 
 <body>
 <div class="shell">
 <header class="site">
-  <div class="brand"><span class="dot"></span><a href="../">arXiv Papers Review</a></div>
+  <nav class="trail"><a class="crumb" href="/">Home</a><span class="crumb">Papers Review</span></nav>
   <button class="theme-toggle" id="theme-toggle" aria-label="theme toggle">☾ Dark</button>
 </header>
 <section class="hero">
