@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="color-scheme" content="dark light"/>
+<meta name="theme-color" content="#0b0f1a" media="(prefers-color-scheme: dark)"/>
+<meta name="theme-color" content="#f6f7fb" media="(prefers-color-scheme: light)"/>
+<title>미국포트투자_1 · 2026-05-18_124850 · stock-strategy</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root {
+  --bg: #0b0f1a;
+  --bg-elev: #131a2c;
+  --bg-card: #161e33;
+  --border: #232c47;
+  --text: #e5e7f3;
+  --text-dim: #9aa3bf;
+  --text-mute: #6b7493;
+  --link: #7dd3fc;
+  --link-hover: #bae6fd;
+  --pos: #22c55e;
+  --neg: #ef4444;
+  --accent: #f59e0b;
+  --accent-soft: rgba(245, 158, 11, 0.12);
+  --shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  --radius: 14px;
+  --radius-sm: 9px;
+}
+[data-theme="light"] {
+  --bg: #f6f7fb;
+  --bg-elev: #ffffff;
+  --bg-card: #ffffff;
+  --border: #e3e6ef;
+  --text: #1a1f2e;
+  --text-dim: #5a6178;
+  --text-mute: #7a8198;
+  --link: #0284c7;
+  --link-hover: #0369a1;
+  --pos: #16a34a;
+  --neg: #dc2626;
+  --shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'SF Pro KR',
+               'Apple SD Gothic Neo', 'Noto Sans KR', Segoe UI, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 16px;
+  font-feature-settings: "tnum" 1, "ss01" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+code {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  color: var(--text);
+}
+
+/* page wrap */
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 28px 22px 64px;
+}
+@media (max-width: 640px) { .page { padding: 18px 14px 48px; } }
+
+/* nav */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  font-size: 14px;
+}
+.nav a.crumb { color: var(--text-dim); }
+.nav a.crumb + a.crumb::before { content: " / "; color: var(--text-mute); margin: 0 6px; }
+.nav .tools button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.nav .tools button:hover { color: var(--text); border-color: var(--text-dim); }
+
+/* hero */
+.hero {
+  padding: 28px 28px 26px;
+  border-radius: var(--radius);
+  background: linear-gradient(
+    135deg,
+    var(--bg-card) 0%,
+    var(--bg-elev) 100%
+  );
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -60%;
+  right: -20%;
+  width: 60%;
+  height: 220%;
+  background: radial-gradient(
+    closest-side,
+    var(--accent-soft),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+.hero .meta {
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+}
+.hero .meta .alias-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 12px;
+}
+.hero h1 {
+  margin: 0 0 14px;
+  font-size: clamp(20px, 3.4vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  position: relative;
+}
+.hero .subline {
+  color: var(--text-dim);
+  font-size: 14px;
+  position: relative;
+}
+.hero .subline strong { color: var(--text); font-weight: 600; }
+
+.regime-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.regime-badge .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* stats strip */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+.stat .k { font-size: 11px; color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.05em; }
+.stat .v { font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--text); }
+.stat .v.pos { color: var(--pos); }
+.stat .v.neg { color: var(--neg); }
+.stat .sub { font-size: 12px; color: var(--text-mute); margin-top: 2px; }
+
+/* sections */
+.section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+}
+@media (max-width: 640px) { .section { padding: 18px 16px; } }
+.section h2 {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 14px;
+  letter-spacing: -0.005em;
+  color: var(--text);
+}
+.section h2::before {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--accent);
+  margin-right: 10px;
+  vertical-align: -2px;
+}
+.section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 20px 0 8px;
+  color: var(--text-dim);
+}
+.section p { margin: 0 0 10px; color: var(--text); }
+.section p:last-child { margin-bottom: 0; }
+.section ul { margin: 8px 0 0; padding-left: 22px; }
+.section ul li { margin-bottom: 6px; }
+
+blockquote {
+  border-left: 3px solid var(--accent);
+  margin: 10px 0;
+  padding: 8px 14px;
+  background: var(--accent-soft);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-dim);
+}
+blockquote p { margin: 0; }
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 20px 0;
+}
+
+/* tables */
+.tbl-wrap {
+  overflow-x: auto;
+  margin: 8px -4px;
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+  min-width: 480px;
+}
+thead th {
+  font-weight: 600;
+  color: var(--text-dim);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elev);
+  white-space: nowrap;
+}
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--bg-elev); }
+
+/* todo list */
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+}
+.todo-list li {
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  background: var(--bg-elev);
+  transition: all 0.15s;
+}
+.todo-list li:hover { border-color: var(--accent); }
+.todo-list label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.todo-list input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 17px;
+  height: 17px;
+  border: 1.5px solid var(--text-mute);
+  border-radius: 5px;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.todo-list input[type="checkbox"]:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.todo-list input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.todo-list input[type="checkbox"]:checked ~ span {
+  color: var(--text-mute);
+  text-decoration: line-through;
+}
+
+/* footer */
+.foot {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-mute);
+  text-align: center;
+  line-height: 1.7;
+}
+.foot .disclaimer {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  text-align: left;
+  color: var(--text-dim);
+}
+
+/* alias landing / site index */
+.runs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.run-card {
+  display: block;
+  padding: 16px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s;
+  box-shadow: var(--shadow);
+}
+.run-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.run-card .when { font-size: 13px; color: var(--text-mute); }
+.run-card .title { font-weight: 600; margin: 6px 0 6px; font-size: 15px; color: var(--text); }
+.run-card .badges { display: flex; gap: 6px; flex-wrap: wrap; font-size: 11px; }
+.run-card .badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+.run-card .badge.no-op { color: var(--text-mute); }
+.run-card .badge.changes { color: var(--accent); border-color: var(--accent); }
+
+.alias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+:root { --accent: #64748b; --accent-soft: #64748b22; }</style>
+</head>
+<body>
+
+<div class="page" data-page-key="미국포트투자_1/2026-05-18_124850">
+<nav class="nav"><div class="trail"><a class="crumb" href="../../index.html">stock-strategy</a><a class="crumb" href="../index.html">미국포트투자_1</a><span class="crumb" style="color:var(--text)">2026-05-18_124850</span></div><div class="tools"><button id="theme-toggle" type="button">☾ dark</button></div></nav>
+
+<header class="hero">
+  <div class="meta">
+    <span class="alias-chip">미국포트투자_1</span>
+    <span>run <code>2026-05-18_124850</code></span>
+    <span class="regime-badge"><span class="dot"></span>— · transition (0.55)</span>
+  </div>
+  <h1>월요일 미장 직전, 변경은 없고 NVDA D-2 분기점에 행동표만 다시 정리합니다.</h1>
+  <div class="subline">
+    started <strong>2026-05-18 21:48:50+09:00</strong>
+    · updated <strong>2026-05-18 22:00:13+09:00</strong>
+  </div>
+</header>
+
+<div class="stats"><div class="stat"><div class="k">REGIME</div><div class="v">— <span style="color:var(--text-mute);font-size:14px;">(transition)</span></div></div><div class="stat"><div class="k">CASH</div><div class="v">67%</div><div class="sub">4 종목 보유</div></div><div class="stat"><div class="k">오늘의 변경</div><div class="v">no_op</div><div class="sub">신규 변경 없음</div></div><div class="stat"><div class="k">미체결 TODO</div><div class="v">5건</div><div class="sub">다음 거래일 행동표</div></div></div>
+<section class="section">
+<blockquote>
+<p>alias <strong>미국포트투자_1</strong> · run <code>2026-05-18_124850</code> · regime <strong>transition</strong> (0.55)</p>
+<p>정기 점검 (no_op) · 직전 run 후 약 24시간 (Sun 5/17 closed-market → Mon 5/18 premkt)</p>
+</blockquote>
+<h2>현재 의도 포지션</h2>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th style="text-align:left">Ticker</th>
+<th style="text-align:right">비중</th>
+<th style="text-align:right">avg cost</th>
+<th style="text-align:left">가설</th>
+<th style="text-align:left">무효 조건</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align:left">GLW</td>
+<td style="text-align:right">8%</td>
+<td style="text-align:right">197.36</td>
+<td style="text-align:left">NVDA $500M 파트너십 + Citi PT 25, 광학 capex 10배 확장</td>
+<td style="text-align:left">close &lt; $170 OR 파트너십 unwind</td>
+</tr>
+<tr>
+<td style="text-align:left">RKLB</td>
+<td style="text-align:right">5%</td>
+<td style="text-align:right">123.46</td>
+<td style="text-align:left">Neutron 멀티-론치 contract + 우주 테마 대장</td>
+<td style="text-align:left">실적 미스 OR high 변동성</td>
+</tr>
+<tr>
+<td style="text-align:left">MU</td>
+<td style="text-align:right">10%</td>
+<td style="text-align:right">806.24</td>
+<td style="text-align:left">HBM sold-out 2026 + 가이드 $33.5B + capex $25B FY26</td>
+<td style="text-align:left">GM &lt; 70% OR HBM 가격 deflation</td>
+</tr>
+<tr>
+<td style="text-align:left">NVDA</td>
+<td style="text-align:right">10%</td>
+<td style="text-align:right">218.85</td>
+<td style="text-align:left">Q1 FY27 D-2, Cantor PT $350, H200 China 10개사 cleared</td>
+<td style="text-align:left">실적 가이드 miss OR -5% gap</td>
+</tr>
+<tr>
+<td style="text-align:left">Cash</td>
+<td style="text-align:right">67%</td>
+<td style="text-align:right">—</td>
+<td style="text-align:left">—</td>
+<td style="text-align:left">—</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>표시 비중은 <strong>사용자가 직접 집행한 결과 기준이 아니라 스킬이 권고한 의도 비중</strong>. 실제 잔고는 본인 브로커에서 확인.</p>
+</blockquote>
+<h2>오늘의 변경 (TL;DR)</h2>
+<p><strong>신규 변경 없음.</strong> 직전 행동표 carry-over + 거시 신규 risk-off 트리거(Mid-East/oil/10y) 모니터링 모드. 5/20 NVDA AMC 결과 후 5/21 run 에서 binary 결과 반영.</p>
+<p>핵심 데이터 변화 (Fri 5/15 close → Mon 5/18 premkt):</p>
+<ul>
+<li><strong>NVDA $225.32 → $228.32 (+1.33%)</strong> — Cantor PT $350 (from $300), H200 China 10개사 cleared (but Trump: "no actual buys yet")</li>
+<li><strong>GLW $185.70 → $194.86 (+4.93%)</strong> — premkt 리바운드, $500M 딜 본질 intact</li>
+<li><strong>MU $715.89 → $715.80 (~flat)</strong> — HBM 매진 2026 재확인, Idaho fab mid-2027</li>
+<li><strong>RKLB $133.00 → $122.33 (-8.02%)</strong> — ATH(5/14 $133.18) 후 풀백, multi-launch 계약 펀더멘털 intact</li>
+<li><strong>Macro:</strong> VIX 18.43 (+6.78%), 10y 4.60%, Brent $110 (UAE 드론 공격), Dow Fut -0.7%, SPX Fut -0.5%</li>
+</ul>
+<h2>다음 거래일 TODO (체크리스트)</h2>
+<p>다음 정규장 = <strong>2026-05-18 (월) 22:30 KST</strong> (09:30 ET — 본 run 직후 ~30분)</p>
+<ul class="todo-list">
+<li><label><input type="checkbox" /><span><strong>NVDA · 사이징 선택</strong> — 두 갈래 중 명시 선택:</span></label></li>
+</ul>
+<ul>
+<li><strong>A) hold 10pp full size</strong> (현 strategic target, D-2 binary 베팅 유지). Cantor PT $350 = current 대비 +53% 상방.</li>
+<li><strong>B) trim 10→8</strong> (pre-event partial trim 25%, playbook_hint 적용, 2pp 캐시 환원 post-earnings 재판단).</li>
+<li>사용자 톤(최대 수익, Kelly-lite 자동)은 <strong>A 우호</strong>. 보수 위주면 B.</li>
+</ul>
+<ul class="todo-list">
+<li><label><input type="checkbox" /><span><strong>MU · 실제 체결가 확인</strong> — limit 806 그대로면 ~715 부근 시장가 체결 (사실상 buy-the-dip). 추가 매수 의도 없으면 <strong>limit 720 부근으로 하향</strong>(slippage 최소화). 체결 후 broker fill 가격 캡처 → 다음 run 에서 cost_basis 정정.</span></label></li>
+<li><label><input type="checkbox" /><span><strong>GLW · limit 유지</strong> (8pp 현행). premkt +4.9% rebound, partnership intact. 추가 add 신호 없음.</span></label></li>
+<li><label><input type="checkbox" /><span><strong>RKLB · limit 유지</strong> (5pp 현행). ATH 후 -8% 풀백, comp -0.085 low. Neutron 첫 발사 H2 2026 D-90 시점 재진입 검토.</span></label></li>
+<li><label><input type="checkbox" /><span><strong>Cash 67% 유지</strong>. VIX 22 돌파 OR SPX -2% 단일일 OR Brent $115 돌파 시 → cash 75% 방어 룰 활성.</span></label></li>
+</ul>
+<h2>가설 채점 (직전 run 후 2일)</h2>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th style="text-align:left">가설</th>
+<th style="text-align:left">종목</th>
+<th style="text-align:right">경과</th>
+<th style="text-align:left">판정</th>
+<th style="text-align:left">코멘트</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align:left">r:2</td>
+<td style="text-align:left">GLW</td>
+<td style="text-align:right">2d</td>
+<td style="text-align:left"><strong>partial</strong></td>
+<td style="text-align:left">partnership intact, premkt +4.9% rebound. inv(close&lt;170) 미충족. exp +12%/6w 의 1/3 시점 정상 궤도.</td>
+</tr>
+<tr>
+<td style="text-align:left">r:3</td>
+<td style="text-align:left">MU</td>
+<td style="text-align:right">2d</td>
+<td style="text-align:left"><strong>partial_warn</strong></td>
+<td style="text-align:left">HBM thesis intact, GM 데이터 미발표 inv 미충족. 단, ret -11.22% &lt; -exp*0.5(=-7.5%) → 경고 등급. avg_cost(806) vs premkt(715) gap 은 limit 체결 시점 차이 — Mon open 체결 후 cost_basis 재계산 필수.</td>
+</tr>
+<tr>
+<td style="text-align:left">r:4</td>
+<td style="text-align:left">NVDA</td>
+<td style="text-align:right">2d</td>
+<td style="text-align:left"><strong>hit_pre</strong></td>
+<td style="text-align:left">+4.33% vs cost. Cantor PT $350 (+$50). H200 China cleared (실판매 미확정). 1w 목표 +6-10% 의 절반 달성. D-2 binary 직전 — playbook_hint(trim_into_strength_pct=25) 후보 (위 TODO 참조).</td>
+</tr>
+</tbody></table></div>
+<p>만료된 가설 없음. 모든 inv 조건 미충족.</p>
+<h2>무효 / 이탈 자동 규칙 (트리거 발생 시 다음 run 자동 처리)</h2>
+<ul>
+<li><strong>NVDA r:4</strong>: 5/20 AMC 발표 후 (a) Q2 guide &lt; $85B, (b) GM &lt; 73%, (c) -5% 갭다운 중 하나 발생 시 EXPIRE 처리. 결과 양호면 r:4 유지 + 가능 시 12w hold 로 전환.</li>
+<li><strong>MU r:3</strong>: NVDA 컨퍼런스 콜에서 HBM 가격 deflation 시그널 또는 GM 데이터 &lt; 70% 확인 시 inv hit. Mon open 체결 후 cost_basis 정정 필수.</li>
+<li><strong>GLW r:2</strong>: 종가 &lt; $170 OR NVDA 파트너십 unwind 뉴스 시 EXPIRE.</li>
+<li><strong>Macro 방어 룰</strong>: VIX 22 돌파 OR SPX -2% 단일일 OR Brent $115 돌파 → cash 67%→75% 자동 권고.</li>
+</ul>
+<h2>다음 호출 권장 시점</h2>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th style="text-align:left">시점</th>
+<th style="text-align:left">트리거</th>
+<th style="text-align:left">이번 run 대비 기대</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align:left">2026-05-19 (화) ~07:00 KST</td>
+<td style="text-align:left">Mon 5/18 종가 입수 후</td>
+<td style="text-align:left">1일 가설 채점 재실행, NVDA 사이징 사용자 선택 결과 반영, MU 실제 체결가 cost_basis 정정</td>
+</tr>
+<tr>
+<td style="text-align:left">2026-05-20 (수) ~07:00 KST</td>
+<td style="text-align:left">NVDA D-1</td>
+<td style="text-align:left">binary event 전 마지막 점검 — IV 변화, options skew, China 후속 보도</td>
+</tr>
+<tr>
+<td style="text-align:left">2026-05-21 (목) ~07:30 KST</td>
+<td style="text-align:left"><strong>NVDA AMC 결과 입수 직후 (필수)</strong></td>
+<td style="text-align:left">r:4 가설 hit/miss 판정 + position 조정 — 이번 run의 가장 큰 분기점</td>
+</tr>
+<tr>
+<td style="text-align:left">거시 트리거</td>
+<td style="text-align:left">VIX&gt;22, SPX&lt;-2%, Brent&gt;$115</td>
+<td style="text-align:left">cash 방어 룰 활성, 즉시 호출</td>
+</tr>
+</tbody></table></div>
+<h2>시나리오 (2주 portfolio return)</h2>
+<ul>
+<li><strong>Best (+6%)</strong>: NVDA beat+raise(+10% × 10pp) + Mid-East 긴장 완화 + GLW 후속 모멘텀</li>
+<li><strong>Base (+0.5%)</strong>: NVDA in-line, no_op 유지, macro 횡보</li>
+<li><strong>Worst (-5.5%)</strong>: NVDA miss+guide cut(-10% × 10pp) + Mid-East 확전 (Brent $120+, SPX -3%) + MU 추가 하락</li>
+</ul>
+<hr/>
+<p>_alias: 미국포트투자_1 · run: 2026-05-18_124850 · regime: transition_</p>
+</section>
+<footer class="foot">
+  <div class="disclaimer">
+    <strong>고지</strong> · 이 페이지는 stock-strategy-planner 가 자동으로 생성한 의사결정 지원 자료입니다.
+    실제 매매·집행은 사용자 본인이 직접 진행하며, 본 페이지의 어떤 내용도 매수/매도 권유가 아닙니다.
+    표시된 비중은 스킬이 권고한 <em>의도 비중</em>이며 실제 보유 비중과 다를 수 있습니다.
+  </div>
+  <div>
+    alias <code>미국포트투자_1</code> · run <code>2026-05-18_124850</code> · regime
+    <code>transition</code>
+  </div>
+  <div style="margin-top:6px;">generated by stock-strategy-planner · static page</div>
+</footer>
+</div>
+
+<script>
+(function () {
+  var saved = (function () { try { return localStorage.getItem('ssp-theme'); } catch (e) { return null; } })();
+  if (saved === 'light' || saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', saved);
+  }
+  function toggle() {
+    var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('ssp-theme', next); } catch (e) {}
+    var btn = document.getElementById('theme-toggle');
+    if (btn) btn.textContent = next === 'dark' ? '☾ dark' : '☀ light';
+  }
+  window.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('theme-toggle');
+    if (btn) {
+      btn.addEventListener('click', toggle);
+      var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+      btn.textContent = cur === 'dark' ? '☾ dark' : '☀ light';
+    }
+    var page = document.body.getAttribute('data-page-key');
+    if (page) {
+      try {
+        var saved = JSON.parse(localStorage.getItem('ssp-checks-' + page) || '{}');
+        document.querySelectorAll('.todo-list input[type=checkbox]').forEach(function (cb, i) {
+          if (saved[i]) cb.checked = true;
+          cb.addEventListener('change', function () {
+            try {
+              var cur = JSON.parse(localStorage.getItem('ssp-checks-' + page) || '{}');
+              cur[i] = cb.checked;
+              localStorage.setItem('ssp-checks-' + page, JSON.stringify(cur));
+            } catch (e) {}
+          });
+        });
+      } catch (e) {}
+    }
+  });
+})();
+</script>
+</body>
+</html>
