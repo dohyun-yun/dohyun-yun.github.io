@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="color-scheme" content="light dark"/>
+<meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#0e1410" media="(prefers-color-scheme: dark)"/>
+<title>한국포트_1 · 2026-05-19_231930 · stock-strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+/* ============================================================
+   Stock Strategy — Field Notes Editorial Light
+   matches dohyun-yun.github.io/assets/css/style.css (Field Notes)
+   ============================================================ */
+:root {
+  --bg: #f7f5f0;
+  --bg-elev: #ffffff;
+  --bg-card: #ffffff;
+  --line: #e5e2db;
+  --line-soft: #efece5;
+  --ink: #1a1a1a;
+  --ink-muted: #555555;
+  --ink-faint: #8a8a85;
+
+  /* text/bg aliases used by older selectors */
+  --border: var(--line);
+  --text: var(--ink);
+  --text-dim: var(--ink-muted);
+  --text-mute: var(--ink-faint);
+  --link: #2c4a3e;
+  --link-hover: #1a3329;
+
+  /* regime accent — overridden per page via theme_css_vars */
+  --accent: #2c4a3e;
+  --accent-hover: #1a3329;
+  --accent-soft: #e8efe9;
+  --highlight: #f0ead6;
+
+  --pos: #c44131;       /* red for ↑ (KR market convention; aligns w/ Field Notes article style) */
+  --neg: #1f5fa8;       /* blue for ↓ */
+  --shadow-sm: 0 1px 2px rgba(26,26,26,0.04);
+  --shadow: 0 4px 24px rgba(26,26,26,0.06);
+  --radius: 12px;
+  --radius-sm: 8px;
+
+  --serif: 'Newsreader','Crimson Pro','Noto Serif KR',Georgia,serif;
+  --sans:  'Pretendard',-apple-system,BlinkMacSystemFont,'SF Pro KR','Apple SD Gothic Neo',Roboto,sans-serif;
+  --mono:  'JetBrains Mono','SF Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+[data-theme="dark"] {
+  --bg: #0e1410;
+  --bg-elev: #161e18;
+  --bg-card: #141a16;
+  --line: #2a322c;
+  --line-soft: #1c241e;
+  --ink: #e6e2d6;
+  --ink-muted: #a8a89a;
+  --ink-faint: #7a7a70;
+  --accent-soft: rgba(149,193,162,0.10);
+  --highlight: rgba(240,234,214,0.18);
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: -0.005em;
+  font-feature-settings: 'ss01','cv11','tnum';
+}
+a { color: inherit; text-decoration: none; transition: color .2s ease; }
+a:hover { color: var(--accent); }
+img { max-width: 100%; display: block; }
+code {
+  background: var(--line-soft);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 0.88em;
+}
+em { font-style: italic; color: var(--accent); }
+strong { font-weight: 600; color: var(--ink); }
+
+/* Korean typography refinement — keeps words whole, balances ragged edges */
+h1, h2, h3, h4, p, li, blockquote, .hero h1, .hero .subline, .section h2, .section h3 {
+  word-break: keep-all;
+  text-wrap: pretty;
+}
+
+/* page wrap */
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 28px 80px;
+}
+@media (max-width: 640px) { .page { padding: 20px 16px 56px; } }
+
+/* nav (breadcrumb) — Field Notes site-header inspired */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+}
+.nav .trail { display: flex; align-items: center; }
+.nav a.crumb,
+.nav span.crumb { color: var(--ink-muted); text-transform: uppercase; }
+.nav a.crumb:hover { color: var(--accent); }
+.nav a.crumb + a.crumb::before,
+.nav a.crumb + span.crumb::before { content: "/"; color: var(--line); margin: 0 8px; }
+.nav .tools button {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+  padding: 5px 11px;
+  border-radius: 100px;
+  font: inherit;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all .15s;
+}
+.nav .tools button:hover { color: var(--accent); border-color: var(--accent); }
+
+/* hero — editorial article opener */
+.hero {
+  padding: 0 0 32px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 36px;
+  position: relative;
+}
+.hero::before { content: none; }
+.hero .meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+}
+.hero .meta .alias-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  font-size: 14px;
+}
+.hero .meta .alias-chip::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: var(--accent);
+}
+.hero h1 {
+  margin: 0 0 14px;
+  font-family: var(--serif);
+  font-size: clamp(1.55rem, 3.6vw, 2.35rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.22;
+  color: var(--ink);
+  max-width: 28ch;
+}
+.hero .subline {
+  color: var(--ink-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  max-width: 52ch;
+}
+.hero .subline strong { color: var(--ink); }
+
+/* regime badge — Field Notes article-tag pill */
+.regime-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: none;
+}
+.regime-badge .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* stats strip — Field Notes stat-grid */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0;
+  margin-bottom: 36px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.stat {
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--line);
+  border-radius: 0;
+  padding: 18px 18px;
+  position: relative;
+}
+.stat:last-child { border-right: none; }
+.stat .k {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 8px;
+}
+.stat .v {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1;
+}
+.stat .v.pos { color: var(--pos); }
+.stat .v.neg { color: var(--neg); }
+.stat .sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  margin-top: 7px;
+}
+@media (max-width: 640px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(2n) { border-right: none; }
+  .stat { border-bottom: 1px solid var(--line); }
+  .stat:nth-last-child(-n+2) { border-bottom: none; }
+}
+
+/* sections — article-body feel, no boxes */
+.section {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0 0 36px;
+  box-shadow: none;
+}
+.section h2 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.section h2::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--accent);
+  margin-right: 12px;
+  vertical-align: 0.32em;
+}
+.section h3 {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin: 26px 0 10px;
+  color: var(--ink);
+}
+.section p { margin: 0 0 14px; color: var(--ink); font-size: 1rem; line-height: 1.7; }
+.section p:last-child { margin-bottom: 0; }
+.section ul, .section ol { margin: 10px 0 0; padding-left: 22px; }
+.section ul li, .section ol li { margin-bottom: 8px; line-height: 1.65; }
+
+blockquote {
+  border-left: 2px solid var(--accent);
+  margin: 18px 0;
+  padding: 4px 0 4px 18px;
+  background: transparent;
+  border-radius: 0;
+  color: var(--ink-muted);
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.55;
+}
+blockquote p { margin: 0; }
+hr {
+  border: none;
+  text-align: center;
+  margin: 28px auto;
+  width: 100%;
+}
+hr::before {
+  content: "◆ ◆ ◆";
+  color: var(--ink-faint);
+  font-size: 0.55rem;
+  letter-spacing: 0.85rem;
+  margin-left: 0.85rem;
+}
+
+/* tables — editorial data table */
+.tbl-wrap {
+  overflow-x: auto;
+  margin: 14px -4px 20px;
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+  min-width: 480px;
+}
+thead th {
+  font-family: var(--mono);
+  font-weight: 500;
+  color: var(--ink-faint);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--ink);
+  background: transparent;
+  white-space: nowrap;
+}
+tbody td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  vertical-align: top;
+  line-height: 1.55;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--line-soft); }
+
+/* todo list — pill cards w/ Field Notes accent checkbox */
+.todo-list { list-style: none; padding: 0; margin: 10px 0 0; }
+.todo-list li {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  background: var(--bg-elev);
+  box-shadow: var(--shadow-sm);
+  transition: border-color .15s ease;
+}
+.todo-list li:hover { border-color: var(--accent); }
+.todo-list label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.todo-list input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  width: 17px; height: 17px;
+  border: 1.5px solid var(--ink-faint);
+  border-radius: 4px;
+  margin: 3px 0 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all .15s;
+  position: relative;
+  background: var(--bg-elev);
+}
+.todo-list input[type="checkbox"]:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.todo-list input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px; top: 0.5px;
+  width: 5px; height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.todo-list input[type="checkbox"]:checked ~ span {
+  color: var(--ink-faint);
+  text-decoration: line-through;
+}
+
+/* footer — quiet disclaimer */
+.foot {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  text-align: left;
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+}
+.foot .disclaimer {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 14px;
+  font-style: italic;
+  font-family: var(--serif);
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+}
+
+/* alias landing & site index — editorial list rows */
+.runs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.run-card {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  gap: 2rem;
+  align-items: baseline;
+  padding: 22px 4px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: none;
+  transition: background .2s ease;
+}
+.run-card:hover {
+  background: linear-gradient(to right, transparent, var(--line-soft), transparent);
+  transform: none;
+  text-decoration: none;
+}
+.run-card .when {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  padding-top: 0.5em;
+  white-space: nowrap;
+}
+.run-card .title {
+  font-family: var(--serif);
+  font-weight: 400;
+  margin: 0;
+  font-size: 1.18rem;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  line-height: 1.4;
+  transition: color .2s ease;
+  word-break: keep-all;
+  text-wrap: pretty;
+  max-width: 56ch;
+}
+.run-card:hover .title { color: var(--accent); }
+.run-card .badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding-top: 0.5em;
+}
+.run-card .badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+.run-card .badge.no-op { color: var(--ink-faint); border-color: var(--line); }
+.run-card .badge.changes { color: var(--accent); border-color: var(--accent); }
+@media (max-width: 720px) {
+  .run-card {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 20px 4px;
+  }
+  .run-card .when,
+  .run-card .badges {
+    padding-top: 0;
+    justify-content: flex-start;
+  }
+  .run-card .title { font-size: 1.1rem; }
+}
+
+/* site index — alias cards (grid of strategies) */
+.alias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+.alias-grid .run-card {
+  display: block;
+  padding: 24px 26px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: all .2s ease;
+}
+.alias-grid .run-card:hover {
+  background: var(--bg-elev);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.alias-grid .run-card .when {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  padding-top: 0;
+  white-space: normal;
+}
+.alias-grid .run-card .title {
+  font-size: 1.18rem;
+  margin: 10px 0 12px;
+  max-width: none;
+}
+.alias-grid .run-card .badges {
+  padding-top: 0;
+  justify-content: flex-start;
+}
+:root { --accent: #b8722a; --accent-soft: #f4ead8; }</style>
+</head>
+<body>
+
+<div class="page" data-page-key="한국포트_1/2026-05-19_231930">
+<nav class="nav"><div class="trail"><a class="crumb" href="/">Home</a><a class="crumb" href="../../index.html">stock-strategy</a><a class="crumb" href="../index.html">한국포트_1</a><span class="crumb" style="color:var(--ink)">2026.05.19 · 23:19</span></div><div class="tools"><button id="theme-toggle" type="button">☾ Dark</button></div></nav>
+
+<header class="hero">
+  <div class="meta">
+    <span class="alias-chip">한국포트_1</span>
+    <span>run <code>2026-05-19_231930</code></span>
+    <span class="regime-badge"><span class="dot"></span>전환 · transition (0.55)</span>
+  </div>
+  <h1>현금 86.6% 너무 무거우니, 5%p 안 넘기는 7개 ETF로 한 호흡씩 분산합니다.</h1>
+  <div class="subline">
+    started <strong>2026-05-19 23:19:30+09:00</strong>
+    · updated <strong>2026-05-19 23:27:00+09:00</strong>
+  </div>
+</header>
+
+<div class="stats"><div class="stat"><div class="k">REGIME</div><div class="v">전환 <span style="color:var(--text-mute);font-size:14px;">(transition)</span></div></div><div class="stat"><div class="k">CASH</div><div class="v">—</div><div class="sub">10 종목 보유</div></div><div class="stat"><div class="k">오늘의 변경</div><div class="v pos">10건</div><div class="sub">10 종목 비중 조정</div></div><div class="stat"><div class="k">미체결 TODO</div><div class="v">12건</div><div class="sub">다음 거래일 행동표</div></div></div>
+<section class="section">
+<blockquote>
+<p>alias <strong>한국포트_1</strong> · run <code>2026-05-19_231930</code> · regime <strong>transition</strong> (conf 0.55)</p>
+<p>ETF-only 정책 (KRX 상장 ETF 한정) · 사용자 첫 포트폴리오 입력 직후 첫 결정</p>
+</blockquote>
+<h2>현재 의도 포지션 (run 직후 목표)</h2>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th style="text-align:left">Ticker</th>
+<th style="text-align:left">종목</th>
+<th style="text-align:right">현재 비중</th>
+<th style="text-align:right">목표 비중</th>
+<th style="text-align:right">avg cost</th>
+<th style="text-align:left">액션</th>
+<th style="text-align:left">가설</th>
+<th style="text-align:left">무효 조건</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align:left">314250.KS</td>
+<td style="text-align:left">KODEX 미국우주항공</td>
+<td style="text-align:right">6.1%</td>
+<td style="text-align:right">6.1%</td>
+<td style="text-align:right">12,280</td>
+<td style="text-align:left">HOLD</td>
+<td style="text-align:left">우주·방산 모멘텀 (+4.27% 위너)</td>
+<td style="text-align:left">평균단가 대비 -8%</td>
+</tr>
+<tr>
+<td style="text-align:left">381180.KS</td>
+<td style="text-align:left">TIGER 미국필라델피아반도체나스닥</td>
+<td style="text-align:right">3.7%</td>
+<td style="text-align:right">3.7%</td>
+<td style="text-align:right">46,957</td>
+<td style="text-align:left">HOLD</td>
+<td style="text-align:left">반도체 단기 조정 인내, 펀더 미손상</td>
+<td style="text-align:left">평균단가 대비 -15%</td>
+</tr>
+<tr>
+<td style="text-align:left">445290.KS</td>
+<td style="text-align:left">KODEX 로봇액티브</td>
+<td style="text-align:right">3.6%</td>
+<td style="text-align:right">3.6%</td>
+<td style="text-align:right">39,193</td>
+<td style="text-align:left">HOLD</td>
+<td style="text-align:left">KR 로보틱스 쿨다운, 구조적 성장 유효</td>
+<td style="text-align:left">평균단가 대비 -15%</td>
+</tr>
+<tr>
+<td style="text-align:left">379800.KS</td>
+<td style="text-align:left">KODEX 미국S&amp;P500</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right"><strong>12%</strong></td>
+<td style="text-align:right">시장가</td>
+<td style="text-align:left"><strong>ADD</strong></td>
+<td style="text-align:left">US broad core, 신호 1위</td>
+<td style="text-align:left">S&amp;P 50일선 + US10Y 4.8% 동시</td>
+</tr>
+<tr>
+<td style="text-align:left">069500.KS</td>
+<td style="text-align:left">KODEX 200</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right"><strong>10%</strong></td>
+<td style="text-align:right">시장가</td>
+<td style="text-align:left"><strong>ADD</strong></td>
+<td style="text-align:left">KR 대형주 코어, 박스 하단 진입</td>
+<td style="text-align:left">KOSPI 2600 + 원달러 1400</td>
+</tr>
+<tr>
+<td style="text-align:left">379810.KS</td>
+<td style="text-align:left">KODEX 미국나스닥100</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right"><strong>8%</strong></td>
+<td style="text-align:right">시장가</td>
+<td style="text-align:left"><strong>ADD</strong></td>
+<td style="text-align:left">NDX·AI 모멘텀, US tech 보강</td>
+<td style="text-align:left">NDX 50일선 + NVDA 가이드↓</td>
+</tr>
+<tr>
+<td style="text-align:left">308620.KS</td>
+<td style="text-align:left">KODEX 미국채10년선물</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right"><strong>8%</strong></td>
+<td style="text-align:right">시장가</td>
+<td style="text-align:left"><strong>ADD</strong></td>
+<td style="text-align:left">듀레이션 헷지, 변동성 흡수</td>
+<td style="text-align:left">US10Y 4.8% 돌파</td>
+</tr>
+<tr>
+<td style="text-align:left">132030.KS</td>
+<td style="text-align:left">KODEX 골드선물(H)</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right"><strong>5%</strong></td>
+<td style="text-align:right">시장가</td>
+<td style="text-align:left"><strong>ADD</strong></td>
+<td style="text-align:left">지정학·인플레 헷지</td>
+<td style="text-align:left">DXY 108 + 실질금리 2%</td>
+</tr>
+<tr>
+<td style="text-align:left">161510.KS</td>
+<td style="text-align:left">ARIRANG 고배당주</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right"><strong>5%</strong></td>
+<td style="text-align:right">시장가</td>
+<td style="text-align:left"><strong>ADD</strong></td>
+<td style="text-align:left">KR 인컴·저변동성</td>
+<td style="text-align:left">KR 약세장 진입</td>
+</tr>
+<tr>
+<td style="text-align:left">278530.KS</td>
+<td style="text-align:left">KODEX 200TR</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right"><strong>3%</strong></td>
+<td style="text-align:right">시장가</td>
+<td style="text-align:left"><strong>ADD</strong></td>
+<td style="text-align:left">KR TR 보완, 배당 재투자</td>
+<td style="text-align:left">KOSPI 2600 이탈</td>
+</tr>
+<tr>
+<td style="text-align:left">Cash</td>
+<td style="text-align:left">예수금 (KRW)</td>
+<td style="text-align:right">86.6%</td>
+<td style="text-align:right"><strong>35.6%</strong></td>
+<td style="text-align:right">—</td>
+<td style="text-align:left">DEPLOY</td>
+<td style="text-align:left">—</td>
+<td style="text-align:left">—</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>위 비중은 스킬이 권고한 <strong>의도 비중</strong>이고 실제 잔고는 본인 브로커에서 확인. ADD 종목의 매수 수량은 다음 거래일 시초 현재가 기준 분할 산정.</p>
+</blockquote>
+<h2>오늘의 변경 (TL;DR)</h2>
+<ul>
+<li>보유 3종 (우주항공/반도체/로보틱스) <strong>HOLD</strong> — 손익 혼조이나 펀더 미손상.</li>
+<li>신규 <strong>7종 ADD</strong> — US 코어(S&amp;P500 + NDX) 20%, KR 코어(KODEX 200 + 200TR) 13%, 채권 8%, 골드 5%, 고배당 5%.</li>
+<li>현금 <strong>86.6% → 35.6%</strong> (51%p 분산 배치). 1차 50% 집행 / 2차 5영업일 내 잔량 분할.</li>
+<li>regime = <strong>transition</strong>, 사이즈 멀티 0.75 적용 (보수 모드).</li>
+</ul>
+<h2>다음 거래일 TODO (체크리스트)</h2>
+<p><strong>다음 정규장 = 2026-05-20 (화) 09:00 KST (KRX)</strong> · 미국 ETF 정산은 한국 영업일 기준 T+2</p>
+<p>1차 매수 (전체 50%, 5/20 시초~오전):</p>
+<ul class="todo-list">
+<li><label><input type="checkbox" /><span><strong>379800.KS (KODEX 미국S&amp;P500)</strong> — 목표 매수액 약 <strong>30,880,000원</strong> (1차 50%), 시초가 ±0.5% GTC 지정가</span></label></li>
+<li><label><input type="checkbox" /><span><strong>069500.KS (KODEX 200)</strong> — 목표 매수액 약 <strong>25,733,000원</strong>, 시초가 ±0.5% GTC 지정가</span></label></li>
+<li><label><input type="checkbox" /><span><strong>379810.KS (KODEX 미국나스닥100)</strong> — 목표 매수액 약 <strong>20,587,000원</strong>, 시초가 ±0.5% 지정가</span></label></li>
+<li><label><input type="checkbox" /><span><strong>308620.KS (KODEX 미국채10년선물)</strong> — 목표 매수액 약 <strong>20,587,000원</strong>, 시초가 ±0.3% 지정가</span></label></li>
+<li><label><input type="checkbox" /><span><strong>132030.KS (KODEX 골드선물H)</strong> — 목표 매수액 약 <strong>12,867,000원</strong>, 시초가 ±0.5% 지정가</span></label></li>
+<li><label><input type="checkbox" /><span><strong>161510.KS (ARIRANG 고배당주)</strong> — 목표 매수액 약 <strong>12,867,000원</strong>, 시초가 ±0.5% 지정가</span></label></li>
+<li><label><input type="checkbox" /><span><strong>278530.KS (KODEX 200TR)</strong> — 목표 매수액 약 <strong>7,720,000원</strong>, 시초가 ±0.5% 지정가</span></label></li>
+</ul>
+<p>2차 잔량 (5영업일 이내, 5/27 까지):</p>
+<ul class="todo-list">
+<li><label><input type="checkbox" /><span>위 7종 잔량 50% — 가격 변동 ±2% 이내면 정상 분할, 그 외엔 가격 추세 확인 후 결정</span></label></li>
+<li><label><input type="checkbox" /><span>1차 집행 결과 가용 예수금 재확인 (목표: 35.6% ≈ 183,200,000원)</span></label></li>
+</ul>
+<p>보유 3종 (HOLD):</p>
+<ul class="todo-list">
+<li><label><input type="checkbox" /><span><strong>314250.KS (KODEX 미국우주항공)</strong> — 가격 ≤ 11,300 (-8%) 알람 설정 (무효 조건)</span></label></li>
+<li><label><input type="checkbox" /><span><strong>381180.KS (TIGER 필라델피아반도체)</strong> — 가격 ≤ 39,913 (-15% stop) 알람 설정</span></label></li>
+<li><label><input type="checkbox" /><span><strong>445290.KS (KODEX 로봇액티브)</strong> — 가격 ≤ 33,314 (-15% stop) 알람 설정</span></label></li>
+</ul>
+<h2>변경된 종목 디테일 (ADD 7종)</h2>
+<h3>379800.KS — KODEX 미국S&amp;P500 · ADD 0% → <strong>12%</strong></h3>
+<ul>
+<li><strong>가설</strong>: 전체 신호 1위 (comp +0.230, med). 미국 광범위 코어 자산. 인플레 둔화 + 테크/시클리컬 로테이션 우호.</li>
+<li><strong>무효</strong>: S&amp;P500 50일선 이탈 + 미국 10Y 4.8% 돌파 동시 발생</li>
+<li><strong>기대</strong>: +5% / 3mo (신뢰 0.55)</li>
+</ul>
+<h3>069500.KS — KODEX 200 · ADD 0% → <strong>10%</strong></h3>
+<ul>
+<li><strong>가설</strong>: KR 대형주 코어. KOSPI 2650-2700 박스 하단 부근 분할 진입. 외국인 수급 양호, 밸류 합리.</li>
+<li><strong>무효</strong>: KOSPI 2600 하향 이탈 + 원달러 1400 돌파</li>
+<li><strong>기대</strong>: +3% / 3mo (신뢰 0.50)</li>
+</ul>
+<h3>379810.KS — KODEX 미국나스닥100 · ADD 0% → <strong>8%</strong></h3>
+<ul>
+<li><strong>가설</strong>: NDX 강세·AI 모멘텀 지속. US tech 코어 보강. 379800 과 함께 US 20% 구성.</li>
+<li><strong>무효</strong>: NDX 50일선 이탈 + NVDA 분기 가이드 하향</li>
+<li><strong>기대</strong>: +6% / 3mo (신뢰 0.55)</li>
+</ul>
+<h3>308620.KS — KODEX 미국채10년선물 · ADD 0% → <strong>8%</strong></h3>
+<ul>
+<li><strong>가설</strong>: 듀레이션 헷지. US10Y 4.2-4.3% 박스에서 위험자산 변동성 흡수 역할. 금리 피크 가정 시 추가 수익.</li>
+<li><strong>무효</strong>: US10Y 4.8% 돌파 (디스인플레 실패)</li>
+<li><strong>기대</strong>: +1% / 3mo (헷지 위주, 신뢰 0.45)</li>
+</ul>
+<h3>132030.KS — KODEX 골드선물(H) · ADD 0% → <strong>5%</strong></h3>
+<ul>
+<li><strong>가설</strong>: 지정학 프리미엄·인플레 헷지·분산. DXY 박스권에서 골드 강세 우호.</li>
+<li><strong>무효</strong>: DXY 108 돌파 + 실질금리 2% 돌파</li>
+<li><strong>기대</strong>: +3% / 3mo (신뢰 0.40)</li>
+</ul>
+<h3>161510.KS — ARIRANG 고배당주 · ADD 0% → <strong>5%</strong></h3>
+<ul>
+<li><strong>가설</strong>: KR 고배당 방어. 저변동성·인컴 성격. 포트 평균 beta 낮춤.</li>
+<li><strong>무효</strong>: 배당정책 변화 또는 KOSPI 약세장 진입</li>
+<li><strong>기대</strong>: +2% / 3mo (배당 포함, 신뢰 0.40)</li>
+</ul>
+<h3>278530.KS — KODEX 200TR · ADD 0% → <strong>3%</strong></h3>
+<ul>
+<li><strong>가설</strong>: 배당 자동 재투자 TR 버전. KODEX 200 보완 + 장기 복리 효과.</li>
+<li><strong>무효</strong>: 069500.KS 와 동일 (KOSPI 2600 이탈)</li>
+<li><strong>기대</strong>: +3% / 3mo (신뢰 0.45)</li>
+</ul>
+<h2>가설 채점 (직전 run)</h2>
+<p>본 run 은 사용자 첫 포트폴리오 입력 직후 <strong>첫 결정</strong> 이라 채점할 직전 가설 없음. 다음 호출부터 본 run 의 10개 결정이 채점 대상.</p>
+<h3>보유 3종 초기 진입 사후평가 (참고용)</h3>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th style="text-align:left">종목</th>
+<th style="text-align:right">진입가</th>
+<th style="text-align:right">현재가</th>
+<th style="text-align:right">손익</th>
+<th style="text-align:left">코멘트</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align:left">314250.KS</td>
+<td style="text-align:right">12,280</td>
+<td style="text-align:right">12,805</td>
+<td style="text-align:right"><strong>+4.27%</strong></td>
+<td style="text-align:left">유일한 위너. 우주·방산 모멘텀이 유효했음.</td>
+</tr>
+<tr>
+<td style="text-align:left">381180.KS</td>
+<td style="text-align:right">46,957</td>
+<td style="text-align:right">44,125</td>
+<td style="text-align:right">-6.03%</td>
+<td style="text-align:left">매수 시점이 PHLX 단기 고점 부근. 펀더 미손상이라 인내.</td>
+</tr>
+<tr>
+<td style="text-align:left">445290.KS</td>
+<td style="text-align:right">39,193</td>
+<td style="text-align:right">36,795</td>
+<td style="text-align:right">-6.11%</td>
+<td style="text-align:left">매수 시점이 KR 로보틱스 단기 과열 후 차익실현 구간.</td>
+</tr>
+</tbody></table></div>
+<p>→ <strong>러닝</strong>: thematic·high-beta ETF 는 한 번에 풀 진입 X. 다음부터 표준 분할 (1차 50% → 가격 -3% 시 추가 50%).</p>
+<h2>무효 / 이탈 자동 규칙</h2>
+<ul>
+<li>보유 3종 → 평균단가 대비 <strong>-15%</strong> 도달 시 stop-loss (자동 CUT 신호 발생)</li>
+<li>314250.KS → 평균단가 대비 <strong>-8%</strong> 도달 시 부분 CUT 신호 (모멘텀 위너이므로 손절 라인 더 보수)</li>
+<li>포트 누적 손실률 <strong>-20%</strong> 도달 시 전체 강제 risk-off (현금 ≥ 60% 복원)</li>
+<li>US10Y 4.8% / DXY 108 / VIX 30 중 둘 이상 동시 충족 → 다음 run 에서 regime 재평가</li>
+<li>신규 ADD 7종 → 무효 조건 (위 디테일 표 참조) 충족 시 다음 run 에서 자동 CUT 검토</li>
+</ul>
+<h2>다음 호출 권장 시점</h2>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th style="text-align:left">시점</th>
+<th style="text-align:left">트리거</th>
+<th style="text-align:left">기대</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align:left"><strong>2026-05-20 (화) 18:00 KST</strong></td>
+<td style="text-align:left">1차 매수 체결 직후 정기 점검</td>
+<td style="text-align:left">체결가 vs 시초가 슬리피지 확인, target_value_krw 재계산</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>2026-05-23 (금) 18:00 KST</strong></td>
+<td style="text-align:left">주중 가격 변동 점검</td>
+<td style="text-align:left">무효 조건 근접 여부, 2차 진입 타이밍</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>2026-05-27 (화) 18:00 KST</strong></td>
+<td style="text-align:left">2차 매수 완료 후 점검</td>
+<td style="text-align:left">신호 재평가, regime 변경 여부</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>이벤트 트리거</strong></td>
+<td style="text-align:left">NVDA 실적 / FOMC / KOSPI ±3%</td>
+<td style="text-align:left">즉시 호출 (자동 catalyst 알림)</td>
+</tr>
+</tbody></table></div>
+<hr/>
+<p>_alias: 한국포트_1 · run: 2026-05-19_231930 · regime: transition · positions: 10 · cash: 35.6% (목표)_</p>
+</section>
+<footer class="foot">
+  <div class="disclaimer">
+    <strong>고지</strong> · 이 페이지는 stock-strategy-planner 가 자동으로 생성한 의사결정 지원 자료입니다.
+    실제 매매·집행은 사용자 본인이 직접 진행하며, 본 페이지의 어떤 내용도 매수/매도 권유가 아닙니다.
+    표시된 비중은 스킬이 권고한 <em>의도 비중</em>이며 실제 보유 비중과 다를 수 있습니다.
+  </div>
+  <div>
+    alias <code>한국포트_1</code> · run <code>2026-05-19_231930</code> · regime
+    <code>transition</code>
+  </div>
+  <div style="margin-top:6px;">generated by stock-strategy-planner · static page</div>
+</footer>
+</div>
+
+<script>
+(function () {
+  var saved = (function () { try { return localStorage.getItem('ssp-theme'); } catch (e) { return null; } })();
+  if (saved === 'light' || saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', saved);
+  }
+  function toggle() {
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('ssp-theme', next); } catch (e) {}
+    var btn = document.getElementById('theme-toggle');
+    if (btn) btn.textContent = next === 'dark' ? '☀ Light' : '☾ Dark';
+  }
+  window.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('theme-toggle');
+    if (btn) {
+      btn.addEventListener('click', toggle);
+      var cur = document.documentElement.getAttribute('data-theme') || 'light';
+      btn.textContent = cur === 'dark' ? '☀ Light' : '☾ Dark';
+    }
+    var page = document.body.getAttribute('data-page-key');
+    if (page) {
+      try {
+        var saved = JSON.parse(localStorage.getItem('ssp-checks-' + page) || '{}');
+        document.querySelectorAll('.todo-list input[type=checkbox]').forEach(function (cb, i) {
+          if (saved[i]) cb.checked = true;
+          cb.addEventListener('change', function () {
+            try {
+              var cur = JSON.parse(localStorage.getItem('ssp-checks-' + page) || '{}');
+              cur[i] = cb.checked;
+              localStorage.setItem('ssp-checks-' + page, JSON.stringify(cur));
+            } catch (e) {}
+          });
+        });
+      } catch (e) {}
+    }
+  });
+})();
+</script>
+</body>
+</html>
