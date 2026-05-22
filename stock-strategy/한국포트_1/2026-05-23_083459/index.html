@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="color-scheme" content="light dark"/>
+<meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)"/>
+<meta name="theme-color" content="#0e1410" media="(prefers-color-scheme: dark)"/>
+<title>한국포트_1 · 2026-05-23_083459 · stock-strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+/* ============================================================
+   Stock Strategy — Field Notes Editorial Light
+   matches dohyun-yun.github.io/assets/css/style.css (Field Notes)
+   ============================================================ */
+:root {
+  --bg: #f7f5f0;
+  --bg-elev: #ffffff;
+  --bg-card: #ffffff;
+  --line: #e5e2db;
+  --line-soft: #efece5;
+  --ink: #1a1a1a;
+  --ink-muted: #555555;
+  --ink-faint: #8a8a85;
+
+  /* text/bg aliases used by older selectors */
+  --border: var(--line);
+  --text: var(--ink);
+  --text-dim: var(--ink-muted);
+  --text-mute: var(--ink-faint);
+  --link: #2c4a3e;
+  --link-hover: #1a3329;
+
+  /* regime accent — overridden per page via theme_css_vars */
+  --accent: #2c4a3e;
+  --accent-hover: #1a3329;
+  --accent-soft: #e8efe9;
+  --highlight: #f0ead6;
+
+  --pos: #c44131;       /* red for ↑ (KR market convention; aligns w/ Field Notes article style) */
+  --neg: #1f5fa8;       /* blue for ↓ */
+  --shadow-sm: 0 1px 2px rgba(26,26,26,0.04);
+  --shadow: 0 4px 24px rgba(26,26,26,0.06);
+  --radius: 12px;
+  --radius-sm: 8px;
+
+  --serif: 'Newsreader','Crimson Pro','Noto Serif KR',Georgia,serif;
+  --sans:  'Pretendard',-apple-system,BlinkMacSystemFont,'SF Pro KR','Apple SD Gothic Neo',Roboto,sans-serif;
+  --mono:  'JetBrains Mono','SF Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+[data-theme="dark"] {
+  --bg: #0e1410;
+  --bg-elev: #161e18;
+  --bg-card: #141a16;
+  --line: #2a322c;
+  --line-soft: #1c241e;
+  --ink: #e6e2d6;
+  --ink-muted: #a8a89a;
+  --ink-faint: #7a7a70;
+  --accent-soft: rgba(149,193,162,0.10);
+  --highlight: rgba(240,234,214,0.18);
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: -0.005em;
+  font-feature-settings: 'ss01','cv11','tnum';
+}
+a { color: inherit; text-decoration: none; transition: color .2s ease; }
+a:hover { color: var(--accent); }
+img { max-width: 100%; display: block; }
+code {
+  background: var(--line-soft);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 0.88em;
+}
+em { font-style: italic; color: var(--accent); }
+strong { font-weight: 600; color: var(--ink); }
+
+/* Korean typography refinement — keeps words whole, balances ragged edges */
+h1, h2, h3, h4, p, li, blockquote, .hero h1, .hero .subline, .section h2, .section h3 {
+  word-break: keep-all;
+  text-wrap: pretty;
+}
+
+/* page wrap */
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 28px 80px;
+}
+@media (max-width: 640px) { .page { padding: 20px 16px 56px; } }
+
+/* nav (breadcrumb) — Field Notes site-header inspired */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+}
+.nav .trail { display: flex; align-items: center; }
+.nav a.crumb,
+.nav span.crumb { color: var(--ink-muted); text-transform: uppercase; }
+.nav a.crumb:hover { color: var(--accent); }
+.nav a.crumb + a.crumb::before,
+.nav a.crumb + span.crumb::before { content: "/"; color: var(--line); margin: 0 8px; }
+.nav .tools button {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+  padding: 5px 11px;
+  border-radius: 100px;
+  font: inherit;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all .15s;
+}
+.nav .tools button:hover { color: var(--accent); border-color: var(--accent); }
+
+/* hero — editorial article opener */
+.hero {
+  padding: 0 0 32px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 36px;
+  position: relative;
+}
+.hero::before { content: none; }
+.hero .meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+}
+.hero .meta .alias-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  font-size: 14px;
+}
+.hero .meta .alias-chip::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: var(--accent);
+}
+.hero h1 {
+  margin: 0 0 14px;
+  font-family: var(--serif);
+  font-size: clamp(1.55rem, 3.6vw, 2.35rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.22;
+  color: var(--ink);
+  max-width: 28ch;
+}
+.hero .subline {
+  color: var(--ink-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  max-width: 52ch;
+}
+.hero .subline strong { color: var(--ink); }
+
+/* regime badge — Field Notes article-tag pill */
+.regime-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: none;
+}
+.regime-badge .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* stats strip — Field Notes stat-grid */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0;
+  margin-bottom: 36px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.stat {
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--line);
+  border-radius: 0;
+  padding: 18px 18px;
+  position: relative;
+}
+.stat:last-child { border-right: none; }
+.stat .k {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 8px;
+}
+.stat .v {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1;
+}
+.stat .v.pos { color: var(--pos); }
+.stat .v.neg { color: var(--neg); }
+.stat .sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  margin-top: 7px;
+}
+@media (max-width: 640px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(2n) { border-right: none; }
+  .stat { border-bottom: 1px solid var(--line); }
+  .stat:nth-last-child(-n+2) { border-bottom: none; }
+}
+
+/* sections — article-body feel, no boxes */
+.section {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0 0 36px;
+  box-shadow: none;
+}
+.section h2 {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.section h2::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 1px;
+  background: var(--accent);
+  margin-right: 12px;
+  vertical-align: 0.32em;
+}
+.section h3 {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin: 26px 0 10px;
+  color: var(--ink);
+}
+.section p { margin: 0 0 14px; color: var(--ink); font-size: 1rem; line-height: 1.7; }
+.section p:last-child { margin-bottom: 0; }
+.section ul, .section ol { margin: 10px 0 0; padding-left: 22px; }
+.section ul li, .section ol li { margin-bottom: 8px; line-height: 1.65; }
+
+blockquote {
+  border-left: 2px solid var(--accent);
+  margin: 18px 0;
+  padding: 4px 0 4px 18px;
+  background: transparent;
+  border-radius: 0;
+  color: var(--ink-muted);
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.55;
+}
+blockquote p { margin: 0; }
+hr {
+  border: none;
+  text-align: center;
+  margin: 28px auto;
+  width: 100%;
+}
+hr::before {
+  content: "◆ ◆ ◆";
+  color: var(--ink-faint);
+  font-size: 0.55rem;
+  letter-spacing: 0.85rem;
+  margin-left: 0.85rem;
+}
+
+/* tables — editorial data table */
+.tbl-wrap {
+  overflow-x: auto;
+  margin: 14px -4px 20px;
+  -webkit-overflow-scrolling: touch;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+  min-width: 480px;
+}
+thead th {
+  font-family: var(--mono);
+  font-weight: 500;
+  color: var(--ink-faint);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--ink);
+  background: transparent;
+  white-space: nowrap;
+}
+tbody td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  vertical-align: top;
+  line-height: 1.55;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--line-soft); }
+
+/* todo list — pill cards w/ Field Notes accent checkbox */
+.todo-list { list-style: none; padding: 0; margin: 10px 0 0; }
+.todo-list li {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  background: var(--bg-elev);
+  box-shadow: var(--shadow-sm);
+  transition: border-color .15s ease;
+}
+.todo-list li:hover { border-color: var(--accent); }
+.todo-list label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.todo-list input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  width: 17px; height: 17px;
+  border: 1.5px solid var(--ink-faint);
+  border-radius: 4px;
+  margin: 3px 0 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all .15s;
+  position: relative;
+  background: var(--bg-elev);
+}
+.todo-list input[type="checkbox"]:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.todo-list input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px; top: 0.5px;
+  width: 5px; height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.todo-list input[type="checkbox"]:checked ~ span {
+  color: var(--ink-faint);
+  text-decoration: line-through;
+}
+
+/* footer — quiet disclaimer */
+.foot {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  text-align: left;
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+}
+.foot .disclaimer {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 14px;
+  font-style: italic;
+  font-family: var(--serif);
+  color: var(--ink-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+}
+
+/* alias landing & site index — editorial list rows */
+.runs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.run-card {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  gap: 2rem;
+  align-items: baseline;
+  padding: 22px 4px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: none;
+  transition: background .2s ease;
+}
+.run-card:hover {
+  background: linear-gradient(to right, transparent, var(--line-soft), transparent);
+  transform: none;
+  text-decoration: none;
+}
+.run-card .when {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  padding-top: 0.5em;
+  white-space: nowrap;
+}
+.run-card .title {
+  font-family: var(--serif);
+  font-weight: 400;
+  margin: 0;
+  font-size: 1.18rem;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  line-height: 1.4;
+  transition: color .2s ease;
+  word-break: keep-all;
+  text-wrap: pretty;
+  max-width: 56ch;
+}
+.run-card:hover .title { color: var(--accent); }
+.run-card .badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding-top: 0.5em;
+}
+.run-card .badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+.run-card .badge.no-op { color: var(--ink-faint); border-color: var(--line); }
+.run-card .badge.changes { color: var(--accent); border-color: var(--accent); }
+@media (max-width: 720px) {
+  .run-card {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 20px 4px;
+  }
+  .run-card .when,
+  .run-card .badges {
+    padding-top: 0;
+    justify-content: flex-start;
+  }
+  .run-card .title { font-size: 1.1rem; }
+}
+
+/* site index — alias cards (grid of strategies) */
+.alias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+.alias-grid .run-card {
+  display: block;
+  padding: 24px 26px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: all .2s ease;
+}
+.alias-grid .run-card:hover {
+  background: var(--bg-elev);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.alias-grid .run-card .when {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  padding-top: 0;
+  white-space: normal;
+}
+.alias-grid .run-card .title {
+  font-size: 1.18rem;
+  margin: 10px 0 12px;
+  max-width: none;
+}
+.alias-grid .run-card .badges {
+  padding-top: 0;
+  justify-content: flex-start;
+}
+:root { --accent: #8a8a85; --accent-soft: #efece5; }</style>
+</head>
+<body>
+
+<div class="page" data-page-key="한국포트_1/2026-05-23_083459">
+<nav class="nav"><div class="trail"><a class="crumb" href="/">Home</a><a class="crumb" href="../../index.html">stock-strategy</a><a class="crumb" href="../index.html">한국포트_1</a><span class="crumb" style="color:var(--ink)">2026.05.23 · 08:34</span></div><div class="tools"><button id="theme-toggle" type="button">☾ Dark</button></div></nav>
+
+<header class="hero">
+  <div class="meta">
+    <span class="alias-chip">한국포트_1</span>
+    <span>run <code>2026-05-23_083459</code></span>
+    <span class="regime-badge"><span class="dot"></span>— · transition_leaning_kr_risk_on (0.72)</span>
+  </div>
+  <h1>주말 점검 — 코스닥이 5% 날았네요. 월요일 229200 전량 잡겠습니다.</h1>
+  <div class="subline">
+    started <strong>2026-05-23 08:35:07+09:00</strong>
+    · updated <strong>2026-05-23 08:51:40+09:00</strong>
+  </div>
+</header>
+
+<div class="stats"><div class="stat"><div class="k">REGIME</div><div class="v">— <span style="color:var(--text-mute);font-size:14px;">(transition_leaning_kr_risk_on)</span></div></div><div class="stat"><div class="k">CASH</div><div class="v">74.3%</div><div class="sub">7 종목 보유</div></div><div class="stat"><div class="k">오늘의 변경</div><div class="v pos">7건</div><div class="sub">7 종목 비중 조정</div></div><div class="stat"><div class="k">미체결 TODO</div><div class="v">7건</div><div class="sub">다음 거래일 행동표</div></div></div>
+<section class="section">
+<blockquote>
+<p>alias <strong>한국포트_1</strong> · run <code>2026-05-23_083459</code> · regime <strong>transition_leaning_kr_risk_on</strong> (0.72)</p>
+<p>주말 점검 · 직전 run(5/22 08:35) 후 +약 24시간 · 다음 정규장 <strong>5/26(월) 09:00 KST</strong></p>
+</blockquote>
+<hr/>
+<h2>현재 의도 포지션</h2>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th style="text-align:left">Ticker</th>
+<th style="text-align:left">종목명</th>
+<th style="text-align:right">비중(%)</th>
+<th style="text-align:right">avg_cost</th>
+<th style="text-align:right">cost_ret</th>
+<th style="text-align:left">상태</th>
+<th style="text-align:left">무효 조건</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align:left">314250.KS</td>
+<td style="text-align:left">KODEX 미국우주항공</td>
+<td style="text-align:right">6.0</td>
+<td style="text-align:right">12,280</td>
+<td style="text-align:right"><strong>+6.0%</strong></td>
+<td style="text-align:left">HOLD</td>
+<td style="text-align:left">avg_cost -8%(≤11,298) or 방위예산 삭감</td>
+</tr>
+<tr>
+<td style="text-align:left">381180.KS</td>
+<td style="text-align:left">TIGER 필라델피아반도체</td>
+<td style="text-align:right">3.7</td>
+<td style="text-align:right">46,957</td>
+<td style="text-align:right"><strong>⚠️ -3.5%</strong></td>
+<td style="text-align:left">HOLD 경보</td>
+<td style="text-align:left">avg_cost -15%(≤39,913) or SOX 50일선 이탈</td>
+</tr>
+<tr>
+<td style="text-align:left">411420.KS</td>
+<td style="text-align:left">KODEX K반도체</td>
+<td style="text-align:right">3.0</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:left"><strong>ADD_PENDING</strong></td>
+<td style="text-align:left">SOX 50일선 + 삼성 실적 미스</td>
+</tr>
+<tr>
+<td style="text-align:left">229200.KS</td>
+<td style="text-align:left">KODEX 코스닥150</td>
+<td style="text-align:right">3.0</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:left"><strong>ADD_PENDING</strong></td>
+<td style="text-align:left">KOSDAQ 1,000 이탈</td>
+</tr>
+<tr>
+<td style="text-align:left">069500.KS</td>
+<td style="text-align:left">KODEX 200</td>
+<td style="text-align:right">4.0</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:left"><strong>ADD_PENDING</strong></td>
+<td style="text-align:left">KOSPI 7,000 이탈 or AI배당 입법화</td>
+</tr>
+<tr>
+<td style="text-align:left">132030.KS</td>
+<td style="text-align:left">KODEX 골드선물(H)</td>
+<td style="text-align:right">3.0</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:left"><strong>ADD_PENDING</strong></td>
+<td style="text-align:left">DXY 108 + 실질금리 2% 동시</td>
+</tr>
+<tr>
+<td style="text-align:left">161510.KS</td>
+<td style="text-align:left">ARIRANG 고배당주</td>
+<td style="text-align:right">3.0</td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:left"><strong>ADD_PENDING</strong></td>
+<td style="text-align:left">배당정책 급변 or KOSPI 7,000 이탈</td>
+</tr>
+<tr>
+<td style="text-align:left">Cash</td>
+<td style="text-align:left">—</td>
+<td style="text-align:right"><strong>74.3</strong></td>
+<td style="text-align:right">—</td>
+<td style="text-align:right">—</td>
+<td style="text-align:left">—</td>
+<td style="text-align:left">—</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>표시 비중은 <strong>권고 의도 비중</strong>입니다. 실제 잔고는 본인 브로커에서 확인하세요.</p>
+</blockquote>
+<hr/>
+<h2>이번 run 변경 TL;DR</h2>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th style="text-align:left">항목</th>
+<th style="text-align:left">이전</th>
+<th style="text-align:left">이번</th>
+<th style="text-align:left">이유</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align:left">411420.KS 목표</td>
+<td style="text-align:left">ADD 4%</td>
+<td style="text-align:left"><strong>ADD 3%</strong></td>
+<td style="text-align:left">삼성 5/22 -2.34% 단기 약세 반영</td>
+</tr>
+<tr>
+<td style="text-align:left">229200.KS</td>
+<td style="text-align:left">ADD_PENDING 분할</td>
+<td style="text-align:left"><strong>ADD 전량 즉각</strong></td>
+<td style="text-align:left">국민성장펀드 출시+KOSDAQ +5% — 더 미루면 안 됩니다</td>
+</tr>
+<tr>
+<td style="text-align:left">132030.KS</td>
+<td style="text-align:left">ADD_PENDING</td>
+<td style="text-align:left"><strong>ADD 즉각</strong></td>
+<td style="text-align:left">WTI $106 급등, 지정학 헤지 수요 강화</td>
+</tr>
+<tr>
+<td style="text-align:left">381180.KS</td>
+<td style="text-align:left">HOLD</td>
+<td style="text-align:left"><strong>HOLD + 45,000 경보</strong></td>
+<td style="text-align:left">cost_ret -3.5% 악화, 45,000 라인 3.9% 위</td>
+</tr>
+<tr>
+<td style="text-align:left">379800/379810</td>
+<td style="text-align:left">DEFER</td>
+<td style="text-align:left">DEFER 유지</td>
+<td style="text-align:left">USDKRW 1,498 — 1,520 트리거 미충족</td>
+</tr>
+</tbody></table></div>
+<hr/>
+<h2>다음 거래일 TODO ✅</h2>
+<p>다음 정규장 = <strong>5/26(월) 09:00 KST</strong></p>
+<ul class="todo-list">
+<li><label><input type="checkbox" /><span><strong>229200.KS 전량 매수</strong> — 1,013주 / 지정가 15,225원 ±2% / 시초가 근처 전량 집행 (국민성장펀드 모멘텀 계속)</span></label></li>
+<li><label><input type="checkbox" /><span><strong>132030.KS 전량 매수</strong> — 905주 / 지정가 17,050원 ±1% / 헤지 포지션 즉각 집행</span></label></li>
+<li><label><input type="checkbox" /><span><strong>069500.KS 1차 50% 매수</strong> — 120주 / 지정가 85,550원 ±2% / 잔량은 5영업일 후</span></label></li>
+<li><label><input type="checkbox" /><span><strong>411420.KS 1차 50% 매수</strong> — 364주 / 지정가 21,200원 ±2% / 삼성 반등 확인 후 잔량 (목표 3%로 축소)</span></label></li>
+<li><label><input type="checkbox" /><span><strong>161510.KS 1차 50% 매수</strong> — 428주 / 지정가 18,000원 ±2% / 잔량은 5영업일 후</span></label></li>
+<li><label><input type="checkbox" /><span><strong>381180.KS 모니터링</strong> — 장중 45,000 이탈 여부 확인. 이탈 시 <strong>즉각 전량 CLOSE</strong></span></label></li>
+<li><label><input type="checkbox" /><span><strong>314250.KS 모니터링</strong> — USDKRW 1,470 이하 추가 강세 시 부분 CLOSE 검토</span></label></li>
+</ul>
+<blockquote>
+<p><em>모든 가격은 추정치입니다. 실제 집행은 본인 브로커에서, 리스크 판단은 본인이 직접 하세요.</em></p>
+</blockquote>
+<hr/>
+<h2>변경 종목 디테일</h2>
+<h3>229200.KS — ADD 0% → 3% (【최우선】)</h3>
+<ul>
+<li><strong>가설</strong>: 국민참여형 국민성장펀드 5/22 출시(연간 6천억, 5년 150조 첨단산업 투자). KOSDAQ 1,161(+4.99%) 신고가 돌파. 6/11 구독 종료까지 자금 유입 구조적 지속.</li>
+<li><strong>시그널</strong>: HIGH (comp 0.53) — 기술·펀더멘탈·정책 3중 수혜</li>
+<li><strong>무효 조건</strong>: KOSDAQ 1,000 하향 이탈 or 반도체·바이오 동반 급락</li>
+<li><strong>기대</strong>: +5% / 3mo (신뢰 0.52)</li>
+<li><strong>교훈</strong>: 5/22 미집행으로 당일 +5% 기회비용. <strong>정책 catalyst는 즉일 집행 원칙</strong> 재확인.</li>
+</ul>
+<h3>411420.KS — ADJ 4% → 3%</h3>
+<ul>
+<li><strong>가설</strong>: HBM 2028 솔드아웃·SK하이닉스 ATH 펀더멘탈 유효. 그러나 삼성전자 5/22 -2.34% 단기 약세 + 레버리지ETF 상장 FOMO 소강. 신중한 진입.</li>
+<li><strong>시그널</strong>: MED (comp 0.21) — 이전 HIGH에서 하락</li>
+<li><strong>무효 조건</strong>: SOX 50일선 이탈 + 삼성 분기 실적 미스 동시</li>
+<li><strong>기대</strong>: +5% / 3mo (신뢰 0.50)</li>
+<li><strong>복원 조건</strong>: 삼성 주가 +3% 이상 회복 확인 시 3%→4% 재상향 검토</li>
+</ul>
+<h3>132030.KS — ADD 0% → 3%</h3>
+<ul>
+<li><strong>가설</strong>: WTI $106.25 급등(+10.52%), 미-이란 협상 교착. 지정학 리스크 프리미엄 강화로 금 헤지 수요 증가. KRW 헤지된 ETF라 환율 중립.</li>
+<li><strong>시그널</strong>: MED (comp 0.25)</li>
+<li><strong>무효 조건</strong>: DXY 108 돌파 + 실질금리 2% 동시 돌파</li>
+<li><strong>기대</strong>: +4% / 3mo (신뢰 0.48)</li>
+</ul>
+<h3>069500.KS — ADD 0% → 4%</h3>
+<ul>
+<li><strong>가설</strong>: KOSPI 7,847 안정 상승. 국민성장펀드 대형주 포함 투자 + 외국인 매도 속에도 개인·기관 견조.</li>
+<li><strong>시그널</strong>: MED (comp 0.30)</li>
+<li><strong>무효 조건</strong>: KOSPI 7,000 하향 이탈 or KR AI배당 실제 입법화</li>
+<li><strong>기대</strong>: +3% / 3mo (신뢰 0.45)</li>
+</ul>
+<h3>161510.KS — ADD 0% → 3%</h3>
+<ul>
+<li><strong>가설</strong>: KOSPI 동반 상승 + 포트폴리오 beta 하향 목적. AI배당 입법 리스크 완화세.</li>
+<li><strong>시그널</strong>: MED (comp 0.20)</li>
+<li><strong>무효 조건</strong>: 배당정책 급변 or KOSPI 7,000 이탈</li>
+<li><strong>기대</strong>: +2% / 3mo + 배당수익 (신뢰 0.40)</li>
+</ul>
+<hr/>
+<h2>가설 채점 (5/22 종가 기준)</h2>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th style="text-align:left">가설</th>
+<th style="text-align:left">종목</th>
+<th style="text-align:right">경과</th>
+<th style="text-align:left">판정</th>
+<th style="text-align:left">코멘트</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align:left">방산·우주 모멘텀 유지</td>
+<td style="text-align:left">314250.KS</td>
+<td style="text-align:right">3일</td>
+<td style="text-align:left"><strong>partial ✅</strong></td>
+<td style="text-align:left">누적 +6%(목표 +5% 도달). KRW 강세로 5/22 -1.4% 하루 후퇴. inv 거리 8% 안전.</td>
+</tr>
+<tr>
+<td style="text-align:left">반도체 회복 인내</td>
+<td style="text-align:left">381180.KS</td>
+<td style="text-align:right">3일</td>
+<td style="text-align:left"><strong>miss/partial ⚠️</strong></td>
+<td style="text-align:left">누적 -3.5%. KRW 강세가 PHLX 수익 상쇄. inv(39,913) 미충족이나 45,000 경계선 3.9% 위.</td>
+</tr>
+<tr>
+<td style="text-align:left">K반도체 FOMO+HBM</td>
+<td style="text-align:left">411420.KS</td>
+<td style="text-align:right">1일</td>
+<td style="text-align:left"><strong>pending</strong></td>
+<td style="text-align:left">미집행. 삼성 -2.34%로 entry 21,200으로 소폭 개선. HBM thesis 유효.</td>
+</tr>
+<tr>
+<td style="text-align:left">코스닥150 growth fund</td>
+<td style="text-align:left">229200.KS</td>
+<td style="text-align:right">1일</td>
+<td style="text-align:left"><strong>pending ⚠️ 기회비용</strong></td>
+<td style="text-align:left">미집행으로 +5% 기회비용(14,500→15,225). 국민성장펀드 출시 당일 즉각 집행 필요했음.</td>
+</tr>
+<tr>
+<td style="text-align:left">KOSPI 대형주 코어</td>
+<td style="text-align:left">069500.KS</td>
+<td style="text-align:right">1일</td>
+<td style="text-align:left"><strong>pending</strong></td>
+<td style="text-align:left">미집행, 기회비용 누적(+0.41%).</td>
+</tr>
+<tr>
+<td style="text-align:left">골드 헤지</td>
+<td style="text-align:left">132030.KS</td>
+<td style="text-align:right">1일</td>
+<td style="text-align:left"><strong>pending</strong></td>
+<td style="text-align:left">미집행, WTI 급등으로 지정학 헤지 thesis 강화됨.</td>
+</tr>
+<tr>
+<td style="text-align:left">KR 고배당 방어</td>
+<td style="text-align:left">161510.KS</td>
+<td style="text-align:right">1일</td>
+<td style="text-align:left"><strong>pending</strong></td>
+<td style="text-align:left">미집행. +1% 소폭 기회비용.</td>
+</tr>
+</tbody></table></div>
+<hr/>
+<h2>자동 무효 트리거 (즉각 대응 필요)</h2>
+<ul>
+<li><strong>381180.KS</strong> — 45,000원 이탈 시 즉각 전량 CLOSE (현재 45,300, 3.9% 여유)</li>
+<li><strong>381180.KS</strong> — USDKRW 1,480 이하 추가 강세 시 CLOSE 검토 (현재 1,498)</li>
+<li><strong>314250.KS</strong> — USDKRW 1,470 이하 도달 시 부분 CLOSE 검토</li>
+<li><strong>229200.KS</strong> — KOSDAQ 1,000 이탈 시 손절</li>
+<li><strong>USDKRW ≥ 1,520</strong> — 379800·379810 ADD 재개 트리거</li>
+</ul>
+<hr/>
+<h2>시장 컨텍스트 (5/22 종가)</h2>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th style="text-align:left">지표</th>
+<th style="text-align:left">값</th>
+<th style="text-align:left">전일 대비</th>
+<th style="text-align:left">해석</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align:left">KOSPI</td>
+<td style="text-align:left">7,847.71</td>
+<td style="text-align:left">+0.41%</td>
+<td style="text-align:left">안정 상승, ATH권</td>
+</tr>
+<tr>
+<td style="text-align:left">KOSDAQ</td>
+<td style="text-align:left">1,161.13</td>
+<td style="text-align:left"><strong>+4.99%</strong></td>
+<td style="text-align:left">ATH 돌파, 국민성장펀드</td>
+</tr>
+<tr>
+<td style="text-align:left">S&amp;P500</td>
+<td style="text-align:left">7,473.47</td>
+<td style="text-align:left">+0.37%</td>
+<td style="text-align:left">완만 강세</td>
+</tr>
+<tr>
+<td style="text-align:left">VIX</td>
+<td style="text-align:left">16.76</td>
+<td style="text-align:left">▼</td>
+<td style="text-align:left">risk_on 영역(&lt;18)</td>
+</tr>
+<tr>
+<td style="text-align:left">USDKRW</td>
+<td style="text-align:left">~1,498</td>
+<td style="text-align:left">—</td>
+<td style="text-align:left">KRW 강세 지속, DEFER 트리거 미충족</td>
+</tr>
+<tr>
+<td style="text-align:left">US10Y</td>
+<td style="text-align:left">~4.62%</td>
+<td style="text-align:left">안정</td>
+<td style="text-align:left">inv(4.8%) 거리 18bp</td>
+</tr>
+<tr>
+<td style="text-align:left">WTI</td>
+<td style="text-align:left">$106.25</td>
+<td style="text-align:left"><strong>+10.52%</strong></td>
+<td style="text-align:left">중동 지정학 급등, 인플레 주시</td>
+</tr>
+<tr>
+<td style="text-align:left">Gold</td>
+<td style="text-align:left">~$4,505</td>
+<td style="text-align:left">안정</td>
+<td style="text-align:left">헤지 수요 유효</td>
+</tr>
+</tbody></table></div>
+<hr/>
+<h2>다음 호출 권장 시점</h2>
+<div class="tbl-wrap"><table>
+<thead><tr>
+<th style="text-align:left">시점</th>
+<th style="text-align:left">트리거</th>
+<th style="text-align:left">기대</th>
+</tr></thead><tbody>
+<tr>
+<td style="text-align:left"><strong>5/26(월) 장중</strong></td>
+<td style="text-align:left">229200·132030 집행 완료 후</td>
+<td style="text-align:left">write-portfolio로 포지션 업데이트</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>5/26(월) 장마감 후</strong></td>
+<td style="text-align:left">정기 daily run</td>
+<td style="text-align:left">ADD 집행 결과 + 381180 45,000 확인</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>수시</strong></td>
+<td style="text-align:left">USDKRW ≥ 1,520 OR 381180 ≤ 45,000</td>
+<td style="text-align:left">즉각 대응 run</td>
+</tr>
+</tbody></table></div>
+<hr/>
+<p>_alias: 한국포트_1 · run: 2026-05-23_083459 · regime: transition_leaning_kr_risk_on_</p>
+</section>
+<footer class="foot">
+  <div class="disclaimer">
+    <strong>고지</strong> · 이 페이지는 stock-strategy-planner 가 자동으로 생성한 의사결정 지원 자료입니다.
+    실제 매매·집행은 사용자 본인이 직접 진행하며, 본 페이지의 어떤 내용도 매수/매도 권유가 아닙니다.
+    표시된 비중은 스킬이 권고한 <em>의도 비중</em>이며 실제 보유 비중과 다를 수 있습니다.
+  </div>
+  <div>
+    alias <code>한국포트_1</code> · run <code>2026-05-23_083459</code> · regime
+    <code>transition_leaning_kr_risk_on</code>
+  </div>
+  <div style="margin-top:6px;">generated by stock-strategy-planner · static page</div>
+</footer>
+</div>
+
+<script>
+(function () {
+  var saved = (function () { try { return localStorage.getItem('ssp-theme'); } catch (e) { return null; } })();
+  if (saved === 'light' || saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', saved);
+  }
+  function toggle() {
+    var cur = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('ssp-theme', next); } catch (e) {}
+    var btn = document.getElementById('theme-toggle');
+    if (btn) btn.textContent = next === 'dark' ? '☀ Light' : '☾ Dark';
+  }
+  window.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('theme-toggle');
+    if (btn) {
+      btn.addEventListener('click', toggle);
+      var cur = document.documentElement.getAttribute('data-theme') || 'light';
+      btn.textContent = cur === 'dark' ? '☀ Light' : '☾ Dark';
+    }
+    var page = document.body.getAttribute('data-page-key');
+    if (page) {
+      try {
+        var saved = JSON.parse(localStorage.getItem('ssp-checks-' + page) || '{}');
+        document.querySelectorAll('.todo-list input[type=checkbox]').forEach(function (cb, i) {
+          if (saved[i]) cb.checked = true;
+          cb.addEventListener('change', function () {
+            try {
+              var cur = JSON.parse(localStorage.getItem('ssp-checks-' + page) || '{}');
+              cur[i] = cb.checked;
+              localStorage.setItem('ssp-checks-' + page, JSON.stringify(cur));
+            } catch (e) {}
+          });
+        });
+      } catch (e) {}
+    }
+  });
+})();
+</script>
+</body>
+</html>
