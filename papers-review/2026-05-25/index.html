@@ -482,7 +482,7 @@ footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); 
   <div class="sub">2026-05-25 · 추천시스템 / 온라인광고 우선</div>
   <div class="stats"><div class="stat"><div class="k">기간</div><div class="v">2026-05-18 ~ 2026-05-25</div></div>
 <div class="stat"><div class="k">카테고리</div><div class="v">cs.IR, cs.LG, cs.CY, cs.AI, cs.SI, stat.ML, cs.CL, cs.DB, cs.DC</div></div>
-<div class="stat"><div class="k">논문 수</div><div class="v">46편</div></div>
+<div class="stat"><div class="k">논문 수</div><div class="v">51편</div></div>
 <div class="stat"><div class="k">생성일</div><div class="v">2026-05-25</div></div></div>
 </section>
 
@@ -544,7 +544,11 @@ footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); 
 <div class="table-wrap"><table>
 <thead><tr><th>#</th><th>논문 제목</th><th>저자</th><th>신뢰도</th><th>핵심 기여</th></tr></thead>
 <tbody>
-<tr><td>-</td><td><em>수집 진행 중</em></td><td>-</td><td>-</td><td><em>에이전트 작업 중</em></td></tr>
+<tr><td>1</td><td>Tiered Anonymity on Social-Media Platforms</td><td>(저자 정보 제한적)</td><td><span class="stars">★★★★<span class="stars-empty">☆</span></span></td><td>딥페이크·LLM 허위정보 대응 3계층 익명성 프레임워크, Reddit 실증 분석</td></tr>
+<tr><td>2</td><td>GA-S³: Social Network Simulation with Group Agents</td><td>Yunyao Zhang 외 (ACL 2025)</td><td><span class="stars">★★★★<span class="stars-empty">☆</span></span></td><td>그룹 에이전트로 대규모 소셜 네트워크 시뮬레이션 확장성 해결</td></tr>
+<tr><td>3</td><td>Cascade-driven Opinion Dynamics on Social Networks</td><td>Elisabetta Biondi 외</td><td><span class="stars">★★★★★<span class="stars-empty"></span></span></td><td>Friedkin-Johnsen 모델에 정보 캐스케이드 통합한 FJC 모델 최초 제안</td></tr>
+<tr><td>4</td><td>LLM-Based Social Simulations Require a Boundary</td><td>Zengqing Wu 외</td><td><span class="stars">★★★★<span class="stars-empty">☆</span></span></td><td>LLM 기반 소셜 시뮬레이션의 정렬·일관성·강건성 경계 문제 체계화</td></tr>
+<tr><td>5</td><td>Characterizing AI-Generated Misinformation on Social Media</td><td>Chiara Drolsbach, Nicolas Pröllochs</td><td><span class="stars">★★★★★<span class="stars-empty"></span></span></td><td>X(Twitter) 91,452개 게시물 분석, AI 생성 허위정보 특성 최초 대규모 실증</td></tr>
 </tbody></table></div>
 <h3 id="statml--statistics-machine-learning-통계적-기계학습">stat.ML — Statistics: Machine Learning (통계적 기계학습)</h3>
 <div class="table-wrap"><table>
@@ -3527,6 +3531,161 @@ footer.site a:hover { color: var(--accent); border-bottom-color: var(--accent); 
 <ul>
 <li><strong>"Communication-Efficient Learning of Deep Networks from Decentralized Data" (McMahan et al., 2017)</strong> — FedAvg 원 논문. 전체 FL 분야의 초석이며, 본 서베이가 비교 기준으로 삼는 핵심 baseline. 인용 수 수만 회 이상의 landmark 논문.</li>
 <li><strong>"Taming the Instability: A Robust Second-Order Optimizer for Federated Learning over Non-IID Data" (2603.28316)</strong> — 2차 FL 최적화에서 Non-IID 데이터 환경의 불안정성을 다루는 후속 연구. 본 서베이에서 다루는 문제를 실제로 해결하는 알고리즘 논문으로, 서베이와 함께 읽으면 이론-실제의 간극을 이해할 수 있음.</li>
+</ul>
+<h2 id="cssi--social-and-information-networks-상세-리뷰-2026-05-25">cs.SI — Social and Information Networks 상세 리뷰 (2026-05-25)</h2>
+<h3 id="1-tiered-anonymity-on-social-media-platforms-as-a-countermea">1. Tiered Anonymity on Social-Media Platforms as a Countermeasure against Deepfakes and LLM-Driven Mass Misinformation</h3>
+<p><strong>arXiv ID</strong>: 2506.12814 <strong>저자</strong>: (저자 정보 제한적 — 공개 검색 결과에서 완전한 저자 목록 미확인) <strong>카테고리</strong>: cs.SI <strong>링크</strong>: https://arxiv.org/abs/2506.12814 <strong>신뢰도</strong>: <span class="stars">★★★★<span class="stars-empty">☆</span></span> (4/5)</p>
+<h4 id="11-문제-정의-및-기존-방법의-한계">1.1 문제 정의 및 기존 방법의 한계</h4>
+<p>딥페이크와 LLM 기반 대규모 허위정보가 소셜 미디어에서 급증함에 따라, 기존의 플랫폼 자율 규제나 사후 팩트체킹만으로는 대응이 불충분하다. 계정 익명성 유지 방식이 일률적으로 적용되어, 소수 계정과 수백만 팔로워를 가진 인플루언서 계정이 동일한 규칙을 적용받는 구조적 문제가 있다.</p>
+<h4 id="12-제안-방법의-핵심-아이디어">1.2 제안 방법의 핵심 아이디어</h4>
+<p>정부가 소셜 미디어 플랫폼에 <strong>3계층 익명성 프레임워크(Tiered Anonymity)</strong> 의무화를 강제하도록 제안한다.</p>
+<ul>
+<li><strong>Tier 1</strong>: 소규모 계정 — 완전한 익명(pseudonymity) 허용. 일상적 프라이버시 보장.</li>
+<li><strong>Tier 2</strong>: 중간 영향력 계정 — 플랫폼 내부에서만 실명과 연결. 계정 도달범위에 비례한 책임성 부여.</li>
+<li><strong>Tier 3</strong>: 대규모 정보 소스 계정 — 게시물별 ML 지원 팩트체킹 및 독립적 검토 의무화.</li>
+</ul>
+<p>Reddit 커뮤니티 운영 실증 분석을 통해 자발적 모더레이터들이 계정 규모가 커질수록 유사한 검증 게이트(karma 임계값, 승인 대기열, 신원 증명)를 채택함을 보여주어 사회적 실현 가능성을 입증한다.</p>
+<h4 id="13-실험-결과-요약">1.3 실험 결과 요약</h4>
+<p>Reddit 데이터 분석을 통한 실증 연구: 규모가 커질수록 자발적으로 강화되는 검증 절차가 제안된 3계층 구조와 수렴함을 확인. 구체적 정량적 수치는 공개 검색 결과에서 확인 제한적.</p>
+<h4 id="14-논문의-한계">1.4 논문의 한계</h4>
+<ul>
+<li>포지션 페이퍼(position paper) 성격으로 제도적 실현 방안이 아직 구체적이지 않음.</li>
+<li>Tier 2/3의 경계 기준(팔로워 수, 영향력 지표)을 정의하는 기준이 모호할 수 있음.</li>
+<li>국가별 법제도 차이(미국 수정헌법 1조 vs. EU DSA/UK OSA)를 일반화하기 어려움.</li>
+<li>익명성 보호가 필요한 내부고발자, 활동가 등에 대한 Tier 분류 예외 처리 문제.</li>
+</ul>
+<h4 id="15-섹션별-주요-내용-및-배경지식">1.5 섹션별 주요 내용 및 배경지식</h4>
+<p>딥페이크와 LLM 생성 콘텐츠의 급격한 품질 향상으로 소셜 미디어상 허위정보 생산 비용이 급감했다. 기존 대응책(플랫폼 자율규제, 사후 팩트체킹, 계정 정지)은 생산 속도를 따라가지 못하는 한계가 있다. 본 논문은 EU DSA(Digital Services Act)와 영국 OSA(Online Safety Act) 등 최신 법제를 참고하여 도달 범위에 비례한 책임 체계(reach-proportional accountability)를 소셜 미디어에 적용하는 규제 경로를 제시한다.</p>
+<h4 id="16-관련-논문-추천">1.6 관련 논문 추천</h4>
+<ul>
+<li><strong>"Characterizing AI-Generated Misinformation on Social Media" (arXiv:2505.10266)</strong> — AI 생성 허위정보의 특성(바이럴리티, 감성, 신뢰도)을 실증 분석하여 본 논문의 정책 동기와 직접 연결되는 실증 근거 제공.</li>
+<li><strong>"Appeal and Scope of Misinformation Spread by AI Agents and Humans" (arXiv:2505.04028)</strong> — AI vs. 인간 허위정보 확산 패턴 비교 분석으로 Tier 3 팩트체킹 설계에 실용적 시사점 제공.</li>
+</ul>
+<h4 id="17-인용-논문-중-주목할-만한-논문">1.7 인용 논문 중 주목할 만한 논문</h4>
+<ul>
+<li><strong>EU Digital Services Act (DSA)</strong> — 대형 플랫폼에 대한 비대칭적 의무를 법적으로 구체화한 선례로, 본 논문의 3계층 구조 설계에 이론적 기반 제공 / 플랫폼 규제 연구의 핵심 법적 참고문헌.</li>
+<li><strong>Friedkin &amp; Johnsen 의견 역학 모델</strong> — 사회적 영향력과 네트워크 구조의 상호작용을 정식화한 고전 모델. 영향력 계층화 논리의 배경지식으로 중요.</li>
+</ul>
+<hr/>
+<h3 id="2-ga-s³-comprehensive-social-network-simulation-with-group-a">2. GA-S³: Comprehensive Social Network Simulation with Group Agents</h3>
+<p><strong>arXiv ID</strong>: 2506.03532 <strong>저자</strong>: Yunyao Zhang, Zikai Song, Hang Zhou, Wenfeng Ren, Yi-Ping Phoebe Chen, Junqing Yu, Wei Yang <strong>카테고리</strong>: cs.SI <strong>링크</strong>: https://arxiv.org/abs/2506.03532 <strong>신뢰도</strong>: <span class="stars">★★★★<span class="stars-empty">☆</span></span> (4/5)</p>
+<h4 id="21-문제-정의-및-기존-방법의-한계">2.1 문제 정의 및 기존 방법의 한계</h4>
+<p>소셜 네트워크 시뮬레이션은 집단 행동 이해, 정책 최적화, 비즈니스 전략 수립에 필수적이다. 그러나 수십억 개인과 그들의 동적 상호작용을 정확히 모델링하는 것은 계산 비용 측면에서 극히 어렵다. 기존 에이전트 기반 시뮬레이션(ABM)은 개별 에이전트가 하나의 개인을 표현하므로 대규모 네트워크에서 확장성 문제가 발생한다.</p>
+<h4 id="22-제안-방법의-핵심-아이디어">2.2 제안 방법의 핵심 아이디어</h4>
+<p><strong>그룹 에이전트(Group Agent)</strong> 개념을 도입하여 유사한 행동 패턴을 보이는 개인들의 집합을 단일 에이전트로 모델링한다. 이를 통해 대규모 소셜 네트워크 현상을 관리 가능한 계산 비용으로 시뮬레이션한다. GA-S³(Group Agent Social Network Simulation System)는 다양한 온라인 이벤트에 대한 그룹 수준의 지능적 의사결정을 지원한다.</p>
+<h4 id="23-실험-결과-요약">2.3 실험 결과 요약</h4>
+<p>ACL 2025 Findings에 채택된 논문으로 peer-reviewed 검증을 통과. 구체적 실험 수치는 공개 검색 결과에서 확인 제한적. 그룹 행동 창발(group behavior emergence), 정책 최적화, 비즈니스 전략 시나리오에서 시뮬레이션 효과성 검증.</p>
+<h4 id="24-논문의-한계">2.4 논문의 한계</h4>
+<ul>
+<li>그룹 에이전트의 군집화 기준(어떤 기준으로 개인을 그룹화하는지)의 타당성 검증이 도전적.</li>
+<li>실제 소셜 네트워크의 이질성(heterogeneity)을 그룹 단위로 압축할 때 발생하는 정보 손실.</li>
+<li>LLM 기반 에이전트의 "평균 페르소나" 문제(Wu et al. 2506.19806에서 지적)가 그룹 에이전트에도 동일하게 적용될 가능성.</li>
+</ul>
+<h4 id="25-섹션별-주요-내용-및-배경지식">2.5 섹션별 주요 내용 및 배경지식</h4>
+<p>에이전트 기반 모델링(ABM)은 복잡계 시뮬레이션의 핵심 방법론이다. 최근 LLM의 발전으로 에이전트가 인간과 유사한 자연어 기반 의사결정을 수행할 수 있게 되어 소셜 시뮬레이션의 현실성이 크게 향상되었다. 본 논문은 이러한 LLM 기반 에이전트를 그룹 수준으로 추상화하여 확장성 문제를 해결하는 혁신적 접근을 제시한다. ACL 2025 Findings 채택으로 NLP 커뮤니티에서의 영향력도 확인된다.</p>
+<h4 id="26-관련-논문-추천">2.6 관련 논문 추천</h4>
+<ul>
+<li><strong>"LLM-Based Social Simulations Require a Boundary" (arXiv:2506.19806)</strong> — LLM 기반 사회 시뮬레이션의 한계와 경계 조건을 논의하여 GA-S³의 그룹 에이전트 설계에 중요한 비판적 시각 제공.</li>
+<li><strong>"Simulating Rumor Spreading in Social Networks using LLM Agents" (arXiv:2502.01450)</strong> — 유사한 LLM 에이전트 기반 소셜 시뮬레이션으로 직접적 비교 대상.</li>
+</ul>
+<h4 id="27-인용-논문-중-주목할-만한-논문">2.7 인용 논문 중 주목할 만한 논문</h4>
+<ul>
+<li><strong>Park et al. (2023) "Generative Agents: Interactive Simulacra of Human Behavior"</strong> — LLM 에이전트가 인간 행동을 시뮬레이션할 수 있음을 보인 선구적 연구 / GA-S³의 에이전트 설계 기반.</li>
+<li><strong>Watts &amp; Strogatz (1998) "Collective dynamics of 'small-world' networks"</strong> — 소셜 네트워크 구조 이해의 핵심 고전 / 그룹 상호작용 모델링의 이론적 배경.</li>
+</ul>
+<hr/>
+<h3 id="3-cascade-driven-opinion-dynamics-on-social-networks">3. Cascade-driven Opinion Dynamics on Social Networks</h3>
+<p><strong>arXiv ID</strong>: 2506.16302 <strong>저자</strong>: Elisabetta Biondi, Chiara Boldrini, Andrea Passarella, Marco Conti (이탈리아 국립연구위원회 IIT) <strong>카테고리</strong>: cs.SI <strong>링크</strong>: https://arxiv.org/abs/2506.16302 <strong>신뢰도</strong>: <span class="stars">★★★★★<span class="stars-empty"></span></span> (5/5)</p>
+<h4 id="31-문제-정의-및-기존-방법의-한계">3.1 문제 정의 및 기존 방법의 한계</h4>
+<p>온라인 소셜 네트워크에서 개인은 직접 상호작용과 광범위한 네트워크 역학 양쪽에서 의견에 영향을 받는다. 기존 의견 역학 모델(예: Friedkin-Johnsen 모델)은 정보 확산 메커니즘(캐스케이드)과 의견 형성을 별개로 다루어, 두 현상의 상호작용 효과를 포착하지 못하는 한계가 있다.</p>
+<h4 id="32-제안-방법의-핵심-아이디어">3.2 제안 방법의 핵심 아이디어</h4>
+<p><strong>FJC(Friedkin-Johnsen on Cascade) 모델</strong>을 제안하여 정보 캐스케이드와 의견 역학을 통합한 최초의 모델을 구축한다. 소셜 미디어에서 뉴스 공유(캐스케이드)와 의견 사회화(socialization)가 결합될 때 전형적인 의견 진화 패턴이 어떻게 변형되는지를 분석한다. 핵심 발견: 캐스케이드는 중심 오피니언 리더의 영향력을 증폭시켜 이들을 이질적 관점에 더 저항적으로 만든다.</p>
+<h4 id="33-실험-결과-요약">3.3 실험 결과 요약</h4>
+<p>이론적 모델 분석 및 시뮬레이션 기반 검증. 12페이지, 9개 그림, 2개 표로 구성. 캐스케이드 통합 시 의견 수렴이 특정 조건에서 교란되고, 네트워크 중심 노드(오피니언 리더)의 의견 고착화가 심화됨을 확인. 구체적 데이터셋 및 정량 수치는 공개 검색 결과에서 확인 제한적.</p>
+<h4 id="34-논문의-한계">3.4 논문의 한계</h4>
+<ul>
+<li>이론 모델 중심으로 대규모 실제 소셜 네트워크 데이터 검증이 보완되면 더 강한 주장 가능.</li>
+<li>FJC 모델의 캐스케이드 파라미터 추정을 실제 데이터에서 어떻게 수행하는지 구체성 부족 가능성.</li>
+<li>온라인 소셜 네트워크의 알고리즘적 필터(추천 시스템)가 캐스케이드에 미치는 영향이 모델에 포함되지 않음.</li>
+</ul>
+<h4 id="35-섹션별-주요-내용-및-배경지식">3.5 섹션별 주요 내용 및 배경지식</h4>
+<p>Friedkin-Johnsen(FJ) 모델은 사회적 영향력과 개인의 초기 의견이 결합되어 네트워크 전반의 의견이 수렴하는 과정을 모델링하는 고전적 의견 역학 프레임워크다. 정보 캐스케이드는 소셜 미디어에서 콘텐츠가 연쇄적으로 공유되는 현상으로, 단순한 정보 전달을 넘어 의견 형성에 영향을 준다. 본 논문은 이 두 현상을 처음으로 통합하여 온라인 정보 환경에서의 에코 챔버(echo chamber) 및 오피니언 리더 효과를 이론적으로 설명한다.</p>
+<h4 id="36-관련-논문-추천">3.6 관련 논문 추천</h4>
+<ul>
+<li><strong>"Towards Effective Planning Strategies for Dynamic Opinion Networks" (arXiv:2410.14091)</strong> — 의견 네트워크에서 개입(intervention) 전략을 동적으로 계획하는 연구로, FJC 모델 기반 허위정보 대응 전략과 직결.</li>
+<li><strong>"GA-S³: Comprehensive Social Network Simulation" (arXiv:2506.03532)</strong> — 대규모 소셜 네트워크 시뮬레이션 시스템으로 FJC 모델 검증의 실험 플랫폼으로 활용 가능.</li>
+</ul>
+<h4 id="37-인용-논문-중-주목할-만한-논문">3.7 인용 논문 중 주목할 만한 논문</h4>
+<ul>
+<li><strong>Friedkin &amp; Johnsen (1990) "Social influence and opinions"</strong> — FJC 모델의 직접적 기반. 사회적 영향력이 의견 형성에 미치는 수학적 모델의 원형 / 의견 역학 연구의 필수 고전.</li>
+<li><strong>Goel et al. (2016) "The structural virality of online diffusion"</strong> — 온라인 정보 확산의 구조적 바이럴리티를 분석한 연구 / 캐스케이드 모델링의 실증적 기반.</li>
+</ul>
+<hr/>
+<h3 id="4-llm-based-social-simulations-require-a-boundary">4. LLM-Based Social Simulations Require a Boundary</h3>
+<p><strong>arXiv ID</strong>: 2506.19806 <strong>저자</strong>: Zengqing Wu, Run Peng, Takayuki Ito, Chuan Xiao, Makoto Onizuka <strong>카테고리</strong>: cs.SI <strong>링크</strong>: https://arxiv.org/abs/2506.19806 <strong>신뢰도</strong>: <span class="stars">★★★★<span class="stars-empty">☆</span></span> (4/5)</p>
+<h4 id="41-문제-정의-및-기존-방법의-한계">4.1 문제 정의 및 기존 방법의 한계</h4>
+<p>LLM 기반 소셜 시뮬레이션이 급증하고 있지만, 이 접근법이 사회과학 연구에 의미 있는 기여를 할 수 있는 조건과 한계가 체계적으로 정의되지 않았다. LLM은 "평균 페르소나(average persona)"로 동질적인 출력을 생성하는 경향이 있어, 복잡한 사회 역학에 필수적인 행동 다양성을 포착하는 데 근본적 한계가 있다.</p>
+<h4 id="42-제안-방법의-핵심-아이디어">4.2 제안 방법의 핵심 아이디어</h4>
+<p>LLM 기반 소셜 시뮬레이션의 <strong>3가지 경계 문제(boundary problems)</strong>를 정의하고 체계화한다:</p>
+<ol>
+<li><strong>정렬(Alignment)</strong>: 시뮬레이션된 행동이 실제 세계 패턴과 일치하는가.</li>
+<li><strong>일관성(Consistency)</strong>: 에이전트 행동이 시간에 걸쳐 일관되게 유지되는가.</li>
+<li><strong>강건성(Robustness)</strong>: 다양한 조건에서 재현 가능한가.</li>
+</ol>
+<p>평균 정렬(mean alignment)과 LLM 생성 행동의 분산(variance) 간 관계를 분석하고, LLM 기반 시뮬레이션이 신뢰할 수 있게 사회과학 이해를 증진할 수 있는 경계에 대한 휴리스틱을 제안한다.</p>
+<h4 id="43-실험-결과-요약">4.3 실험 결과 요약</h4>
+<p>포지션 페이퍼 성격으로 주요 결과는 분석적·이론적 성격. LLM의 동질성 문제를 실증적으로 확인하고 한계 조건을 분류하는 프레임워크 제시. 구체적 정량 수치는 공개 검색 결과에서 확인 제한적.</p>
+<h4 id="44-논문의-한계">4.4 논문의 한계</h4>
+<ul>
+<li>포지션 페이퍼로서 제안된 경계 기준이 아직 완전히 검증되지 않음.</li>
+<li>특정 LLM 모델(GPT-4, Claude 등)에 대한 경계가 다른 모델에 일반화될 수 있는지 불명확.</li>
+<li>사회과학 연구자와 AI 연구자 간 학제간 협업 필요성을 주장하지만 구체적 방법론 부재.</li>
+</ul>
+<h4 id="45-섹션별-주요-내용-및-배경지식">4.5 섹션별 주요 내용 및 배경지식</h4>
+<p>LLM이 인간 행동을 시뮬레이션할 수 있다는 가능성(Park et al. 2023 "Generative Agents")이 제시된 이후, 사회과학 연구에서 LLM 기반 시뮬레이션의 활용이 급증했다. 그러나 LLM의 학습 데이터 편향, RLHF에 의한 안전성 정렬, 인구통계적 다양성 부족 등이 복잡한 사회적 행동 다양성 재현을 제한한다. 본 논문은 이러한 문제를 최초로 체계적으로 분류하고 사회과학적 활용 가능 영역과 불가능 영역을 구분하는 프레임워크를 제시한다.</p>
+<h4 id="46-관련-논문-추천">4.6 관련 논문 추천</h4>
+<ul>
+<li><strong>"GA-S³: Comprehensive Social Network Simulation" (arXiv:2506.03532)</strong> — LLM 기반 그룹 에이전트 시뮬레이션으로, 본 논문의 경계 프레임워크가 직접 적용될 수 있는 실용 사례.</li>
+<li><strong>"Towards Simulating Social Influence Dynamics with LLM-based Multi-agents" (arXiv:2507.22467)</strong> — LLM 멀티에이전트로 집단 역학(동조, 집단 극화)을 재현 가능한지 검증하는 연구로 직접적 보완 연구.</li>
+</ul>
+<h4 id="47-인용-논문-중-주목할-만한-논문">4.7 인용 논문 중 주목할 만한 논문</h4>
+<ul>
+<li><strong>Park et al. (2023) "Generative Agents: Interactive Simulacra of Human Behavior"</strong> — LLM 에이전트 기반 사회 시뮬레이션의 시발점 / 본 논문의 비판적 검토 대상.</li>
+<li><strong>Argyle et al. (2023) "Out of One, Many: Using Language Models to Simulate Human Samples"</strong> — LLM으로 여론 조사를 시뮬레이션하는 가능성을 탐구한 연구 / 정렬(alignment) 경계 논의의 핵심 선행연구.</li>
+</ul>
+<hr/>
+<h3 id="5-characterizing-ai-generated-misinformation-on-social-media">5. Characterizing AI-Generated Misinformation on Social Media</h3>
+<p><strong>arXiv ID</strong>: 2505.10266 <strong>저자</strong>: Chiara Drolsbach, Nicolas Pröllochs <strong>카테고리</strong>: cs.SI <strong>링크</strong>: https://arxiv.org/abs/2505.10266 <strong>신뢰도</strong>: <span class="stars">★★★★★<span class="stars-empty"></span></span> (5/5)</p>
+<h4 id="51-문제-정의-및-기존-방법의-한계">5.1 문제 정의 및 기존 방법의 한계</h4>
+<p>AI 생성 허위정보의 특성을 체계적으로 분석한 대규모 실증 연구가 부족하다. 기존 연구는 AI 생성 콘텐츠를 탐지하는 데 초점을 맞추거나 소규모 실험 설계에 의존하여, 실제 플랫폼에서 AI 생성 허위정보가 어떤 특성을 보이는지 충분히 이해하지 못했다.</p>
+<h4 id="52-제안-방법의-핵심-아이디어">5.2 제안 방법의 핵심 아이디어</h4>
+<p>X(구 Twitter)의 <strong>Community Notes</strong> 플랫폼을 통해 팩트체킹된 91,452개 오해 유발 게시물(AI 생성 및 비AI 생성)의 대규모 데이터셋을 구축하고 분석한다. AI 생성 허위정보와 인간이 생성한 허위정보를 다차원적으로 비교한다: 콘텐츠 특성(감성, 주제), 계정 특성(규모), 확산 패턴(바이럴리티), 신뢰성·유해성 인식.</p>
+<h4 id="53-실험-결과-요약">5.3 실험 결과 요약</h4>
+<p>4가지 핵심 발견:</p>
+<ol>
+<li>AI 생성 허위정보는 오락적 콘텐츠에 집중되고 더 긍정적인 감성을 보임.</li>
+<li>주로 소규모 계정(팔로워 수 적음)에서 발생.</li>
+<li>그럼에도 불구하고 바이럴리티가 유의미하게 더 높음 (더 빠르게 확산).</li>
+<li>신뢰도와 유해성 측면에서는 기존 허위정보보다 약간 낮음.</li>
+</ol>
+<h4 id="54-논문의-한계">5.4 논문의 한계</h4>
+<ul>
+<li>X(Twitter) 단일 플랫폼에 국한 — Facebook, Instagram, TikTok 등으로 일반화 불확실.</li>
+<li>Community Notes의 자원봉사 팩트체커 편향이 데이터셋에 영향을 줄 수 있음.</li>
+<li>AI 생성 여부 판별 자체가 오류 가능성을 내포.</li>
+<li>시간적 변화(AI 기술 발전에 따른 AI 생성 허위정보 진화) 미반영.</li>
+</ul>
+<h4 id="55-섹션별-주요-내용-및-배경지식">5.5 섹션별 주요 내용 및 배경지식</h4>
+<p>생성 AI의 급격한 발전으로 고품질 텍스트, 이미지, 동영상 허위정보 생산이 민주화되었다. Community Notes는 X의 크라우드소싱 팩트체킹 시스템으로, 허위/오해 유발 게시물에 사용자들이 설명 노트를 추가한다. 이 데이터는 실제 플랫폼에서 팩트체킹된 허위정보의 신뢰할 수 있는 레이블을 제공하여 대규모 실증 연구를 가능하게 한다. 바이럴리티 분석은 AI 생성 허위정보가 왜 더 잘 확산되는지(감성적 어필, 오락적 특성)에 대한 중요한 실용적 시사점을 제공한다.</p>
+<h4 id="56-관련-논문-추천">5.6 관련 논문 추천</h4>
+<ul>
+<li><strong>"Tiered Anonymity on Social-Media Platforms..." (arXiv:2506.12814)</strong> — AI 생성 허위정보의 실증 증거를 정책적 대응 방안과 직접 연결하는 보완 연구.</li>
+<li><strong>"Appeal and Scope of Misinformation Spread by AI Agents and Humans" (arXiv:2505.04028)</strong> — 허위정보 확산에서 AI와 인간 역할의 매력도(appeal) 비교 분석으로 직접적 후속 연구.</li>
+</ul>
+<h4 id="57-인용-논문-중-주목할-만한-논문">5.7 인용 논문 중 주목할 만한 논문</h4>
+<ul>
+<li><strong>Vosoughi et al. (2018) "The spread of true and false news online" (Science)</strong> — 허위정보가 진실보다 더 빠르게 확산된다는 것을 처음 대규모로 실증한 고전 / AI 생성 허위정보의 높은 바이럴리티 발견의 중요한 비교 기준점.</li>
+<li><strong>Goldstein et al. (2023) "Generative Language Models and Automated Influence Operations"</strong> — LLM이 영향력 작전에 활용될 수 있음을 경고한 선구적 연구 / AI 허위정보 연구의 동기 부여.</li>
 </ul>
 </main>
 <footer class="site">
