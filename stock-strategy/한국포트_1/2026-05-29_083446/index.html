@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="light dark"/>
 <meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)"/>
 <meta name="theme-color" content="#0e1410" media="(prefers-color-scheme: dark)"/>
-<title>한국포트_1 · 2026-05-19_231930 · stock-strategy</title>
+<title>한국포트_1 · 2026-05-29_083446 · stock-strategy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
 /* ============================================================
@@ -565,273 +565,216 @@ tbody tr:hover { background: var(--line-soft); }
   padding-top: 0;
   justify-content: flex-start;
 }
-:root { --accent: #b8722a; --accent-soft: #f4ead8; }</style>
+:root { --accent: #8a8a85; --accent-soft: #efece5; }</style>
 </head>
 <body>
 
-<div class="page" data-page-key="한국포트_1/2026-05-19_231930">
-<nav class="nav"><div class="trail"><a class="crumb" href="/">Home</a><a class="crumb" href="../../index.html">stock-strategy</a><a class="crumb" href="../index.html">한국포트_1</a><span class="crumb" style="color:var(--ink)">2026.05.19 · 23:19</span></div><div class="tools"><button id="theme-toggle" type="button">☾ Dark</button></div></nav>
+<div class="page" data-page-key="한국포트_1/2026-05-29_083446">
+<nav class="nav"><div class="trail"><a class="crumb" href="/">Home</a><a class="crumb" href="../../index.html">stock-strategy</a><a class="crumb" href="../index.html">한국포트_1</a><span class="crumb" style="color:var(--ink)">2026.05.29 · 08:34</span></div><div class="tools"><button id="theme-toggle" type="button">☾ Dark</button></div></nav>
 
 <header class="hero">
   <div class="meta">
     <span class="alias-chip">한국포트_1</span>
-    <span>run <code>2026-05-19_231930</code></span>
-    <span class="regime-badge"><span class="dot"></span>전환 · transition (0.55)</span>
+    <span>run <code>2026-05-29_083446</code></span>
+    <span class="regime-badge"><span class="dot"></span>— · transition_risk_on (0.72)</span>
   </div>
-  <h1>현금 86.6% 너무 무거우니, 5%p 안 넘기는 7개 ETF로 한 호흡씩 분산합니다.</h1>
+  <h1>신호 강한 세 종목에만 17% 보태고, 나머지는 Roller-KOSPI 지나보고 결정합니다.</h1>
   <div class="subline">
-    started <strong>2026-05-19 23:19:30+09:00</strong>
-    · updated <strong>2026-05-19 23:27:00+09:00</strong>
+    started <strong>2026-05-29 08:34:46+09:00</strong>
+    · updated <strong>2026-05-29 08:53:04+09:00</strong>
   </div>
 </header>
 
-<div class="stats"><div class="stat"><div class="k">REGIME</div><div class="v">전환 <span style="color:var(--text-mute);font-size:14px;">(transition)</span></div></div><div class="stat"><div class="k">CASH</div><div class="v">—</div><div class="sub">5 종목 보유</div></div><div class="stat"><div class="k">오늘의 변경</div><div class="v pos">10건</div><div class="sub">10 종목 비중 조정</div></div><div class="stat"><div class="k">미체결 TODO</div><div class="v">12건</div><div class="sub">다음 거래일 행동표</div></div></div>
+<div class="stats"><div class="stat"><div class="k">REGIME</div><div class="v">— <span style="color:var(--text-mute);font-size:14px;">(transition_risk_on)</span></div></div><div class="stat"><div class="k">CASH</div><div class="v">—</div><div class="sub">5 종목 보유</div></div><div class="stat"><div class="k">오늘의 변경</div><div class="v">0건</div><div class="sub">0 종목 비중 조정</div></div><div class="stat"><div class="k">미체결 TODO</div><div class="v">5건</div><div class="sub">다음 거래일 행동표</div></div></div>
 <section class="section">
 <blockquote>
-<p>alias <strong>한국포트_1</strong> · run <code>2026-05-19_231930</code> · regime <strong>transition</strong> (conf 0.55)</p>
-<p>ETF-only 정책 (KRX 상장 ETF 한정) · 사용자 첫 포트폴리오 입력 직후 첫 결정</p>
+<p>alias <strong>한국포트_1</strong> · run <code>2026-05-29_083446</code> · regime <strong>transition_risk_on</strong> (0.72)</p>
+<p>정기 점검 · 직전 run 후 2일 경과 (5/27 → 5/29)</p>
 </blockquote>
-<h2>현재 의도 포지션 (run 직후 목표)</h2>
+<hr/>
+<h2>현재 의도 포지션</h2>
 <div class="tbl-wrap"><table>
 <thead><tr>
 <th style="text-align:left">Ticker</th>
 <th style="text-align:left">종목</th>
-<th style="text-align:right">현재 비중</th>
-<th style="text-align:right">목표 비중</th>
+<th style="text-align:right">비중</th>
 <th style="text-align:right">avg cost</th>
-<th style="text-align:left">액션</th>
-<th style="text-align:left">가설</th>
+<th style="text-align:left">가설 요약</th>
 <th style="text-align:left">무효 조건</th>
 </tr></thead><tbody>
 <tr>
 <td style="text-align:left">314250.KS</td>
 <td style="text-align:left">KODEX 미국우주항공</td>
-<td style="text-align:right">6.1%</td>
-<td style="text-align:right">6.1%</td>
+<td style="text-align:right"><strong>6.0%</strong></td>
 <td style="text-align:right">12,280</td>
-<td style="text-align:left">HOLD</td>
-<td style="text-align:left">우주·방산 모멘텀 (+4.27% 위너)</td>
-<td style="text-align:left">평균단가 대비 -8%</td>
+<td style="text-align:left">SpaceX IPO D-14. RKLB ATH. 6/9 trim 준비</td>
+<td style="text-align:left">SpaceX 연기/철회 OR sell-the-news 급락</td>
 </tr>
 <tr>
 <td style="text-align:left">381180.KS</td>
-<td style="text-align:left">TIGER 미국필라델피아반도체나스닥</td>
-<td style="text-align:right">3.7%</td>
-<td style="text-align:right">3.7%</td>
+<td style="text-align:left">TIGER 미국PHLX반도체</td>
+<td style="text-align:right"><strong>3.7%</strong></td>
 <td style="text-align:right">46,957</td>
-<td style="text-align:left">HOLD</td>
-<td style="text-align:left">반도체 단기 조정 인내, 펀더 미손상</td>
-<td style="text-align:left">평균단가 대비 -15%</td>
+<td style="text-align:left">SOX +1.71%(12,919). HBM. 49,024.</td>
+<td style="text-align:left">종가 48,000 이탈 OR USDKRW 1,480이하</td>
 </tr>
 <tr>
-<td style="text-align:left">445290.KS</td>
-<td style="text-align:left">KODEX 로봇액티브</td>
-<td style="text-align:right">3.6%</td>
-<td style="text-align:right">3.6%</td>
-<td style="text-align:right">39,193</td>
-<td style="text-align:left">HOLD</td>
-<td style="text-align:left">KR 로보틱스 쿨다운, 구조적 성장 유효</td>
-<td style="text-align:left">평균단가 대비 -15%</td>
+<td style="text-align:left">411420.KS</td>
+<td style="text-align:left">KODEX K반도체</td>
+<td style="text-align:right"><strong>3.0%</strong></td>
+<td style="text-align:right">23,800</td>
+<td style="text-align:left">SOX+HBM HIGH신호(0.47). 오늘 647주 집행</td>
+<td style="text-align:left">PHLX 급락 OR SK하이닉스 195만 이탈</td>
 </tr>
 <tr>
-<td style="text-align:left">379800.KS</td>
-<td style="text-align:left">KODEX 미국S&amp;P500</td>
-<td style="text-align:right">—</td>
-<td style="text-align:right"><strong>12%</strong></td>
-<td style="text-align:right">시장가</td>
-<td style="text-align:left"><strong>ADD</strong></td>
-<td style="text-align:left">US broad core, 신호 1위</td>
-<td style="text-align:left">S&amp;P 50일선 + US10Y 4.8% 동시</td>
-</tr>
-<tr>
-<td style="text-align:left">069500.KS</td>
-<td style="text-align:left">KODEX 200</td>
-<td style="text-align:right">—</td>
-<td style="text-align:right"><strong>10%</strong></td>
-<td style="text-align:right">시장가</td>
-<td style="text-align:left"><strong>ADD</strong></td>
-<td style="text-align:left">KR 대형주 코어, 박스 하단 진입</td>
-<td style="text-align:left">KOSPI 2600 + 원달러 1400</td>
-</tr>
-<tr>
-<td style="text-align:left">379810.KS</td>
-<td style="text-align:left">KODEX 미국나스닥100</td>
-<td style="text-align:right">—</td>
-<td style="text-align:right"><strong>8%</strong></td>
-<td style="text-align:right">시장가</td>
-<td style="text-align:left"><strong>ADD</strong></td>
-<td style="text-align:left">NDX·AI 모멘텀, US tech 보강</td>
-<td style="text-align:left">NDX 50일선 + NVDA 가이드↓</td>
-</tr>
-<tr>
-<td style="text-align:left">308620.KS</td>
-<td style="text-align:left">KODEX 미국채10년선물</td>
-<td style="text-align:right">—</td>
-<td style="text-align:right"><strong>8%</strong></td>
-<td style="text-align:right">시장가</td>
-<td style="text-align:left"><strong>ADD</strong></td>
-<td style="text-align:left">듀레이션 헷지, 변동성 흡수</td>
-<td style="text-align:left">US10Y 4.8% 돌파</td>
+<td style="text-align:left">229200.KS</td>
+<td style="text-align:left">KODEX 코스닥150</td>
+<td style="text-align:right"><strong>2.2%</strong></td>
+<td style="text-align:right">15,569</td>
+<td style="text-align:left">국민성장펀드 완판(D-13). 720주 축소 집행</td>
+<td style="text-align:left">펀드 조기환매 OR 코스닥 1,050 이탈</td>
 </tr>
 <tr>
 <td style="text-align:left">132030.KS</td>
 <td style="text-align:left">KODEX 골드선물(H)</td>
-<td style="text-align:right">—</td>
-<td style="text-align:right"><strong>5%</strong></td>
-<td style="text-align:right">시장가</td>
-<td style="text-align:left"><strong>ADD</strong></td>
-<td style="text-align:left">지정학·인플레 헷지</td>
-<td style="text-align:left">DXY 108 + 실질금리 2%</td>
-</tr>
-<tr>
-<td style="text-align:left">161510.KS</td>
-<td style="text-align:left">ARIRANG 고배당주</td>
-<td style="text-align:right">—</td>
-<td style="text-align:right"><strong>5%</strong></td>
-<td style="text-align:right">시장가</td>
-<td style="text-align:left"><strong>ADD</strong></td>
-<td style="text-align:left">KR 인컴·저변동성</td>
-<td style="text-align:left">KR 약세장 진입</td>
-</tr>
-<tr>
-<td style="text-align:left">278530.KS</td>
-<td style="text-align:left">KODEX 200TR</td>
-<td style="text-align:right">—</td>
-<td style="text-align:right"><strong>3%</strong></td>
-<td style="text-align:right">시장가</td>
-<td style="text-align:left"><strong>ADD</strong></td>
-<td style="text-align:left">KR TR 보완, 배당 재투자</td>
-<td style="text-align:left">KOSPI 2600 이탈</td>
+<td style="text-align:right"><strong>2.1%</strong></td>
+<td style="text-align:right">16,370</td>
+<td style="text-align:left">지정학 헤지. 미-이란 불확실성. 650주 집행</td>
+<td style="text-align:left">금 $4,200 이탈 OR 이란 협상 최종 타결</td>
 </tr>
 <tr>
 <td style="text-align:left">Cash</td>
-<td style="text-align:left">예수금 (KRW)</td>
-<td style="text-align:right">86.6%</td>
-<td style="text-align:right"><strong>35.6%</strong></td>
+<td style="text-align:left">—</td>
+<td style="text-align:right"><strong>82.8%</strong></td>
 <td style="text-align:right">—</td>
-<td style="text-align:left">DEPLOY</td>
 <td style="text-align:left">—</td>
 <td style="text-align:left">—</td>
 </tr>
 </tbody></table></div>
 <blockquote>
-<p>위 비중은 스킬이 권고한 <strong>의도 비중</strong>이고 실제 잔고는 본인 브로커에서 확인. ADD 종목의 매수 수량은 다음 거래일 시초 현재가 기준 분할 산정.</p>
+<p>표시 비중은 스킬이 권고한 <strong>의도 비중</strong> (오늘 집행 예정 기준). 실제 잔고는 브로커에서 확인 후 <code>write-portfolio</code>로 업데이트해 주세요.</p>
 </blockquote>
+<hr/>
 <h2>오늘의 변경 (TL;DR)</h2>
+<p><strong>신규 ADD 3종</strong> · <strong>DEFER 2종</strong> (신호 낮음)</p>
 <ul>
-<li>보유 3종 (우주항공/반도체/로보틱스) <strong>HOLD</strong> — 손익 혼조이나 펀더 미손상.</li>
-<li>신규 <strong>7종 ADD</strong> — US 코어(S&amp;P500 + NDX) 20%, KR 코어(KODEX 200 + 200TR) 13%, 채권 8%, 골드 5%, 고배당 5%.</li>
-<li>현금 <strong>86.6% → 35.6%</strong> (51%p 분산 배치). 1차 50% 집행 / 2차 5영업일 내 잔량 분할.</li>
-<li>regime = <strong>transition</strong>, 사이즈 멀티 0.75 적용 (보수 모드).</li>
+<li><strong>ADD</strong> 411420.KS (KODEX K반도체) 647주 → <strong>3.0%</strong> ← HIGH 신호 (comp=0.47), 5/27-28 3회 미집행 종료</li>
+<li><strong>ADD</strong> 229200.KS (KODEX 코스닥150) 720주 → <strong>2.2%</strong> ← 국민성장펀드 완판 D-13, 신호 낮아 축소</li>
+<li><strong>ADD</strong> 132030.KS (KODEX 골드선물(H)) 650주 → <strong>2.1%</strong> ← 지정학 헤지, med 신호</li>
+<li><strong>DEFER</strong> 069500.KS — Roller-KOSPI (장중 -4%), 신호 LOW (0.03), 외인 50조 매도</li>
+<li><strong>DEFER</strong> 161510.KS — 신호 LOW (0.03), min_change 미충족 (1.47% &lt; 2%)</li>
 </ul>
+<hr/>
 <h2>다음 거래일 TODO (체크리스트)</h2>
-<p><strong>다음 정규장 = 2026-05-20 (화) 09:00 KST (KRX)</strong> · 미국 ETF 정산은 한국 영업일 기준 T+2</p>
-<p>1차 매수 (전체 50%, 5/20 시초~오전):</p>
+<p>다음 정규장 = <strong>오늘 2026-05-29 09:00 KST</strong> (5/28 22:30 ET)</p>
+<h3>⚡ 오늘 즉시 (시가 전후)</h3>
 <ul class="todo-list">
-<li><label><input type="checkbox" /><span><strong>379800.KS (KODEX 미국S&amp;P500)</strong> — 목표 매수액 약 <strong>30,880,000원</strong> (1차 50%), 시초가 ±0.5% GTC 지정가</span></label></li>
-<li><label><input type="checkbox" /><span><strong>069500.KS (KODEX 200)</strong> — 목표 매수액 약 <strong>25,733,000원</strong>, 시초가 ±0.5% GTC 지정가</span></label></li>
-<li><label><input type="checkbox" /><span><strong>379810.KS (KODEX 미국나스닥100)</strong> — 목표 매수액 약 <strong>20,587,000원</strong>, 시초가 ±0.5% 지정가</span></label></li>
-<li><label><input type="checkbox" /><span><strong>308620.KS (KODEX 미국채10년선물)</strong> — 목표 매수액 약 <strong>20,587,000원</strong>, 시초가 ±0.3% 지정가</span></label></li>
-<li><label><input type="checkbox" /><span><strong>132030.KS (KODEX 골드선물H)</strong> — 목표 매수액 약 <strong>12,867,000원</strong>, 시초가 ±0.5% 지정가</span></label></li>
-<li><label><input type="checkbox" /><span><strong>161510.KS (ARIRANG 고배당주)</strong> — 목표 매수액 약 <strong>12,867,000원</strong>, 시초가 ±0.5% 지정가</span></label></li>
-<li><label><input type="checkbox" /><span><strong>278530.KS (KODEX 200TR)</strong> — 목표 매수액 약 <strong>7,720,000원</strong>, 시초가 ±0.5% 지정가</span></label></li>
+<li><label><input type="checkbox" /><span><strong>411420.KS 647주</strong> 지정가 매수 · 기준가 23,800원 ±0.5% · 미체결 시 당일 내 재주문 (HIGH 신호, 3회 미집행 종료)</span></label></li>
+<li><label><input type="checkbox" /><span><strong>229200.KS 720주</strong> 지정가 매수 · 기준가 15,569원 · 국민성장펀드 D-13 시한 있음</span></label></li>
+<li><label><input type="checkbox" /><span><strong>132030.KS 650주</strong> 지정가 매수 · 기준가 16,370원 · 긴급도 낮음, 당일 내 체결 확인</span></label></li>
 </ul>
-<p>2차 잔량 (5영업일 이내, 5/27 까지):</p>
+<h3>🗓️ 6/8 (월) 저녁 — 사전 등록 필수</h3>
 <ul class="todo-list">
-<li><label><input type="checkbox" /><span>위 7종 잔량 50% — 가격 변동 ±2% 이내면 정상 분할, 그 외엔 가격 추세 확인 후 결정</span></label></li>
-<li><label><input type="checkbox" /><span>1차 집행 결과 가용 예수금 재확인 (목표: 35.6% ≈ 183,200,000원)</span></label></li>
+<li><label><input type="checkbox" /><span><strong>314250.KS 1,228주</strong> 매도 지정가 등록 · 목표가 <strong>15,000–16,000원</strong> · 6/9 시전 D-3 sell-the-news 방어</span></label></li>
 </ul>
-<p>보유 3종 (HOLD):</p>
+<h3>📋 집행 후 필수</h3>
 <ul class="todo-list">
-<li><label><input type="checkbox" /><span><strong>314250.KS (KODEX 미국우주항공)</strong> — 가격 ≤ 11,300 (-8%) 알람 설정 (무효 조건)</span></label></li>
-<li><label><input type="checkbox" /><span><strong>381180.KS (TIGER 필라델피아반도체)</strong> — 가격 ≤ 39,913 (-15% stop) 알람 설정</span></label></li>
-<li><label><input type="checkbox" /><span><strong>445290.KS (KODEX 로봇액티브)</strong> — 가격 ≤ 33,314 (-15% stop) 알람 설정</span></label></li>
+<li><label><input type="checkbox" /><span>오늘 3종 집행 완료 시 <code>write-portfolio</code>로 실제 체결가·수량 업데이트</span></label></li>
 </ul>
-<h2>변경된 종목 디테일 (ADD 7종)</h2>
-<h3>379800.KS — KODEX 미국S&amp;P500 · ADD 0% → <strong>12%</strong></h3>
+<hr/>
+<h2>변경된 종목 디테일</h2>
+<h3>411420.KS — ADD 0% → 3.0% (647주 @ ≈23,800)</h3>
 <ul>
-<li><strong>가설</strong>: 전체 신호 1위 (comp +0.230, med). 미국 광범위 코어 자산. 인플레 둔화 + 테크/시클리컬 로테이션 우호.</li>
-<li><strong>무효</strong>: S&amp;P500 50일선 이탈 + 미국 10Y 4.8% 돌파 동시 발생</li>
-<li><strong>기대</strong>: +5% / 3mo (신뢰 0.55)</li>
+<li><strong>가설</strong>: SOX 5/28 +1.71%(12,919). SK하이닉스 200만닉스(ATH) + HBM 슈퍼사이클. K반도체 ETF가 KOSPI 장중 -4% 충격 속 낙폭매수 수혜 중심. 신호 HIGH (comp=0.47).</li>
+<li><strong>무효 조건</strong>: PHLX 급락(-5% 이상) OR SK하이닉스 종가 195만 이탈 OR SOX -10% 조정</li>
+<li><strong>기대</strong>: +5-8% / 3주 (신뢰 0.62)</li>
+<li><strong>참고</strong>: 5/27 ref 23,400 대비 +1.7% 비싸졌으나 신호 HIGH 유지. 3회 미집행 만회 차원에서 분할 없이 전량 집행.</li>
 </ul>
-<h3>069500.KS — KODEX 200 · ADD 0% → <strong>10%</strong></h3>
+<h3>229200.KS — ADD 0% → 2.2% (720주 @ ≈15,569)</h3>
 <ul>
-<li><strong>가설</strong>: KR 대형주 코어. KOSPI 2650-2700 박스 하단 부근 분할 진입. 외국인 수급 양호, 밸류 합리.</li>
-<li><strong>무효</strong>: KOSPI 2600 하향 이탈 + 원달러 1400 돌파</li>
-<li><strong>기대</strong>: +3% / 3mo (신뢰 0.50)</li>
+<li><strong>가설</strong>: 국민성장펀드 5/22 출시 완판. 7,200억 운용, 코스닥 기술특례상장사 30%+ 의무. D-13(6/11 마감) 구간 내 수급 지지 기대. 5/27 ref 15,975 대비 2.5% 저렴.</li>
+<li><strong>무효 조건</strong>: 국민성장펀드 조기환매 급증 OR 코스닥 1,050 이탈(-4.9%) OR 외인 일매도 1조+</li>
+<li><strong>기대</strong>: +3-5% / 2주 (신뢰 0.48)</li>
+<li><strong>참고</strong>: 신호 LOW (comp=0.13, 기술적 약세) vs 펀드 catalyst 확정. 갈등 감안 원래 975주 → 720주로 축소. 외인 압력 완화 확인 후 잔여 255주 재검토.</li>
 </ul>
-<h3>379810.KS — KODEX 미국나스닥100 · ADD 0% → <strong>8%</strong></h3>
+<h3>132030.KS — ADD 0% → 2.1% (650주 @ ≈16,370)</h3>
 <ul>
-<li><strong>가설</strong>: NDX 강세·AI 모멘텀 지속. US tech 코어 보강. 379800 과 함께 US 20% 구성.</li>
-<li><strong>무효</strong>: NDX 50일선 이탈 + NVDA 분기 가이드 하향</li>
-<li><strong>기대</strong>: +6% / 3mo (신뢰 0.55)</li>
+<li><strong>가설</strong>: 포트 지정학 헤지. 트럼프 '미-이란 협상 불만족' 발언(5/28) → 협상 타결 inv 미충족. WTI $90-91 지속. 금 $4,404 ($4,200 inv 원거리). 환헤지(H)로 USDKRW 변동 최소화.</li>
+<li><strong>무효 조건</strong>: 금 $4,200 이탈 OR 미-이란 핵협상 최종 타결 공식 발표</li>
+<li><strong>기대</strong>: +2-4% / 6주 (신뢰 0.38)</li>
+<li><strong>참고</strong>: 원래 452주 계획 → min_change(2%) 기준 충족 위해 650주로 조정. 추가(잔여 목표 3%)는 금 재하락 시 고려.</li>
 </ul>
-<h3>308620.KS — KODEX 미국채10년선물 · ADD 0% → <strong>8%</strong></h3>
-<ul>
-<li><strong>가설</strong>: 듀레이션 헷지. US10Y 4.2-4.3% 박스에서 위험자산 변동성 흡수 역할. 금리 피크 가정 시 추가 수익.</li>
-<li><strong>무효</strong>: US10Y 4.8% 돌파 (디스인플레 실패)</li>
-<li><strong>기대</strong>: +1% / 3mo (헷지 위주, 신뢰 0.45)</li>
-</ul>
-<h3>132030.KS — KODEX 골드선물(H) · ADD 0% → <strong>5%</strong></h3>
-<ul>
-<li><strong>가설</strong>: 지정학 프리미엄·인플레 헷지·분산. DXY 박스권에서 골드 강세 우호.</li>
-<li><strong>무효</strong>: DXY 108 돌파 + 실질금리 2% 돌파</li>
-<li><strong>기대</strong>: +3% / 3mo (신뢰 0.40)</li>
-</ul>
-<h3>161510.KS — ARIRANG 고배당주 · ADD 0% → <strong>5%</strong></h3>
-<ul>
-<li><strong>가설</strong>: KR 고배당 방어. 저변동성·인컴 성격. 포트 평균 beta 낮춤.</li>
-<li><strong>무효</strong>: 배당정책 변화 또는 KOSPI 약세장 진입</li>
-<li><strong>기대</strong>: +2% / 3mo (배당 포함, 신뢰 0.40)</li>
-</ul>
-<h3>278530.KS — KODEX 200TR · ADD 0% → <strong>3%</strong></h3>
-<ul>
-<li><strong>가설</strong>: 배당 자동 재투자 TR 버전. KODEX 200 보완 + 장기 복리 효과.</li>
-<li><strong>무효</strong>: 069500.KS 와 동일 (KOSPI 2600 이탈)</li>
-<li><strong>기대</strong>: +3% / 3mo (신뢰 0.45)</li>
-</ul>
-<h2>가설 채점 (직전 run)</h2>
-<p>본 run 은 사용자 첫 포트폴리오 입력 직후 <strong>첫 결정</strong> 이라 채점할 직전 가설 없음. 다음 호출부터 본 run 의 10개 결정이 채점 대상.</p>
-<h3>보유 3종 초기 진입 사후평가 (참고용)</h3>
+<hr/>
+<h2>가설 채점 (직전 run: 5/27)</h2>
 <div class="tbl-wrap"><table>
 <thead><tr>
 <th style="text-align:left">종목</th>
-<th style="text-align:right">진입가</th>
-<th style="text-align:right">현재가</th>
-<th style="text-align:right">손익</th>
+<th style="text-align:left">가설 요약</th>
+<th style="text-align:right">경과</th>
+<th style="text-align:left">판정</th>
 <th style="text-align:left">코멘트</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align:left">314250.KS</td>
-<td style="text-align:right">12,280</td>
-<td style="text-align:right">12,805</td>
-<td style="text-align:right"><strong>+4.27%</strong></td>
-<td style="text-align:left">유일한 위너. 우주·방산 모멘텀이 유효했음.</td>
+<td style="text-align:left">314250.KS HOLD</td>
+<td style="text-align:left">SpaceX IPO D-17 모멘텀</td>
+<td style="text-align:right">2일</td>
+<td style="text-align:left">✅ <strong>hit</strong></td>
+<td style="text-align:left">IPO 6/12 확정(6/4 로드쇼). RKLB $148.51 ATH권. 일중 -1.1% 정상 조정. 가설 강하게 intact.</td>
 </tr>
 <tr>
-<td style="text-align:left">381180.KS</td>
-<td style="text-align:right">46,957</td>
-<td style="text-align:right">44,125</td>
-<td style="text-align:right">-6.03%</td>
-<td style="text-align:left">매수 시점이 PHLX 단기 고점 부근. 펀더 미손상이라 인내.</td>
+<td style="text-align:left">381180.KS HOLD</td>
+<td style="text-align:left">SOX+하이닉스 강세</td>
+<td style="text-align:right">2일</td>
+<td style="text-align:left">✅ <strong>hit</strong></td>
+<td style="text-align:left">SOX +1.71%. 49,024. 48,000 inv 원거리. cost_ret +4.4% 회복.</td>
 </tr>
 <tr>
-<td style="text-align:left">445290.KS</td>
-<td style="text-align:right">39,193</td>
-<td style="text-align:right">36,795</td>
-<td style="text-align:right">-6.11%</td>
-<td style="text-align:left">매수 시점이 KR 로보틱스 단기 과열 후 차익실현 구간.</td>
+<td style="text-align:left">229200.KS ADD_PENDING</td>
+<td style="text-align:left">국민성장펀드 catalyst</td>
+<td style="text-align:right">2일</td>
+<td style="text-align:left">⚠️ <strong>partial</strong></td>
+<td style="text-align:left">펀드 완판(catalyst 확정)에도 KOSDAQ -2.54%. 외인 압력 우위. inv 미충족. 오늘 15,569 재집행.</td>
+</tr>
+<tr>
+<td style="text-align:left">411420.KS ADD_PENDING</td>
+<td style="text-align:left">HBM/K반도체</td>
+<td style="text-align:right">2일</td>
+<td style="text-align:left">✅ <strong>hit</strong></td>
+<td style="text-align:left">SOX +1.71% → K반도체 추정 +1.7%. inv 모두 미충족. <strong>3회 미집행 기회 손실.</strong> 오늘 전량 집행.</td>
+</tr>
+<tr>
+<td style="text-align:left">069500.KS ADD_PENDING</td>
+<td style="text-align:left">KOSPI 8,000 진입</td>
+<td style="text-align:right">2일</td>
+<td style="text-align:left">⚠️ <strong>partial</strong></td>
+<td style="text-align:left">KOSPI 8,185 유지. 그러나 장중 -4% 충격(Roller-KOSPI). 외인 50조 매도. DEFER.</td>
+</tr>
+<tr>
+<td style="text-align:left">132030.KS ADD_PENDING</td>
+<td style="text-align:left">골드 헤지</td>
+<td style="text-align:right">2일</td>
+<td style="text-align:left">⚠️ <strong>partial</strong></td>
+<td style="text-align:left">금 -2.35%($4,404). 미-이란 inv 미충족. 헤지 역할 유효. 오늘 650주 집행.</td>
+</tr>
+<tr>
+<td style="text-align:left">161510.KS ADD_PENDING</td>
+<td style="text-align:left">배당 방어</td>
+<td style="text-align:right">2일</td>
+<td style="text-align:left">⚠️ <strong>partial</strong></td>
+<td style="text-align:left">외인 매도 동반 -1.51%. inv 미충족. DEFER.</td>
 </tr>
 </tbody></table></div>
-<p>→ <strong>러닝</strong>: thematic·high-beta ETF 는 한 번에 풀 진입 X. 다음부터 표준 분할 (1차 50% → 가격 -3% 시 추가 50%).</p>
+<hr/>
 <h2>무효 / 이탈 자동 규칙</h2>
 <ul>
-<li>보유 3종 → 평균단가 대비 <strong>-15%</strong> 도달 시 stop-loss (자동 CUT 신호 발생)</li>
-<li>314250.KS → 평균단가 대비 <strong>-8%</strong> 도달 시 부분 CUT 신호 (모멘텀 위너이므로 손절 라인 더 보수)</li>
-<li>포트 누적 손실률 <strong>-20%</strong> 도달 시 전체 강제 risk-off (현금 ≥ 60% 복원)</li>
-<li>US10Y 4.8% / DXY 108 / VIX 30 중 둘 이상 동시 충족 → 다음 run 에서 regime 재평가</li>
-<li>신규 ADD 7종 → 무효 조건 (위 디테일 표 참조) 충족 시 다음 run 에서 자동 CUT 검토</li>
+<li><strong>314250.KS</strong>: SpaceX IPO 연기 확정 → 즉시 CLOSE 재검토 (현재 6/12 예정 확정 상태)</li>
+<li><strong>381180.KS</strong>: 종가 <strong>48,000</strong> 이탈 → 경보 재점검. USDKRW <strong>1,480</strong> 이하 → CLOSE 검토</li>
+<li><strong>411420.KS</strong>: SK하이닉스 종가 <strong>195만</strong> 이탈 → CLOSE 재검토</li>
+<li><strong>229200.KS</strong>: 코스닥 <strong>1,050</strong> 이탈 → CLOSE. 외인 일매도 <strong>1조+</strong> → 포지션 재평가</li>
+<li><strong>132030.KS</strong>: 금 <strong>$4,200</strong> 이탈 → CLOSE. 미-이란 최종 타결 → CLOSE</li>
+<li><strong>379800/379810 DEFER 해제</strong>: USDKRW <strong>≥ 1,520</strong> 돌파 시 즉시 ADD 검토</li>
 </ul>
+<hr/>
 <h2>다음 호출 권장 시점</h2>
 <div class="tbl-wrap"><table>
 <thead><tr>
@@ -840,28 +783,28 @@ tbody tr:hover { background: var(--line-soft); }
 <th style="text-align:left">기대</th>
 </tr></thead><tbody>
 <tr>
-<td style="text-align:left"><strong>2026-05-20 (화) 18:00 KST</strong></td>
-<td style="text-align:left">1차 매수 체결 직후 정기 점검</td>
-<td style="text-align:left">체결가 vs 시초가 슬리피지 확인, target_value_krw 재계산</td>
+<td style="text-align:left">2026-06-02 (월) 08:30 KST</td>
+<td style="text-align:left">정기 주간 점검</td>
+<td style="text-align:left">오늘 집행 결과 반영, 411420/229200/132030 체결 확인</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>2026-05-23 (금) 18:00 KST</strong></td>
-<td style="text-align:left">주중 가격 변동 점검</td>
-<td style="text-align:left">무효 조건 근접 여부, 2차 진입 타이밍</td>
+<td style="text-align:left">2026-06-04 (수) 장중</td>
+<td style="text-align:left">SpaceX 로드쇼 개시</td>
+<td style="text-align:left">314250 모멘텀 강화 or 리스크 재평가</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>2026-05-27 (화) 18:00 KST</strong></td>
-<td style="text-align:left">2차 매수 완료 후 점검</td>
-<td style="text-align:left">신호 재평가, regime 변경 여부</td>
+<td style="text-align:left">2026-06-08 (일) 저녁</td>
+<td style="text-align:left">6/9 trim D-1 준비</td>
+<td style="text-align:left">314250 지정가 매도 주문 사전 등록</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>이벤트 트리거</strong></td>
-<td style="text-align:left">NVDA 실적 / FOMC / KOSPI ±3%</td>
-<td style="text-align:left">즉시 호출 (자동 catalyst 알림)</td>
+<td style="text-align:left">2026-06-11 (목) 장 마감</td>
+<td style="text-align:left">국민성장펀드 마감</td>
+<td style="text-align:left">229200 차익 실현 or 잔여 255주 추가 판단</td>
 </tr>
 </tbody></table></div>
 <hr/>
-<p>_alias: 한국포트_1 · run: 2026-05-19_231930 · regime: transition · positions: 10 · cash: 35.6% (목표)_</p>
+<p><em>alias: 한국포트_1 · run: 2026-05-29_083446 · regime: transition_risk_on</em></p>
 </section>
 <footer class="foot">
   <div class="disclaimer">
@@ -870,8 +813,8 @@ tbody tr:hover { background: var(--line-soft); }
     표시된 비중은 스킬이 권고한 <em>의도 비중</em>이며 실제 보유 비중과 다를 수 있습니다.
   </div>
   <div>
-    alias <code>한국포트_1</code> · run <code>2026-05-19_231930</code> · regime
-    <code>transition</code>
+    alias <code>한국포트_1</code> · run <code>2026-05-29_083446</code> · regime
+    <code>transition_risk_on</code>
   </div>
   <div style="margin-top:6px;">generated by stock-strategy-planner · static page</div>
 </footer>
